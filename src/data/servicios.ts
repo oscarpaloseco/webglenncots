@@ -94,7 +94,7 @@ export const servicios: Servicio[] = [
       ],
     },
     forWhom: {
-      heading: "Esta consulta es para ti si",
+      heading: "Para quién es esta consulta",
       items: [
         "Te han diagnosticado hipotiroidismo o Hashimoto y no sabes por dónde empezar",
         "Tomas medicación pero sigues con síntomas",
@@ -178,7 +178,7 @@ export const servicios: Servicio[] = [
       ],
     },
     forWhom: {
-      heading: "Esta consulta es para ti si",
+      heading: "Para quién es esta consulta",
       items: [
         "Llevas tiempo hinchada o con digestiones pesadas y nadie te da una solución de fondo",
         "Te han hablado de SIBO o SII y no sabes cómo abordarlo",
@@ -260,7 +260,7 @@ export const servicios: Servicio[] = [
       ],
     },
     forWhom: {
-      heading: "Esta consulta es para ti si",
+      heading: "Para quién es esta consulta",
       items: [
         "Convives con una enfermedad autoinmune y quieres reducir brotes",
         "Notas que la alimentación y el estrés influyen en cómo te encuentras",
@@ -343,7 +343,7 @@ export const servicios: Servicio[] = [
       ],
     },
     forWhom: {
-      heading: "Esta consulta es para ti si",
+      heading: "Para quién es esta consulta",
       items: [
         "Te cuesta perder peso aunque lo intentas todo",
         "Tienes resistencia a la insulina, prediabetes o hígado graso",

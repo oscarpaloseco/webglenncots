@@ -55,7 +55,7 @@ const related = (await getCollection("blog", ({ data }) => !data.draft))
   {related.length > 0 && (
     <section class="section surface-cream2">
       <div class="container">
-        <h2 class="related__title">Sigue leyendo</h2>
+        <h2 class="related__title">Sigue <em>leyendo</em></h2>
         <div class="related__grid">
           {related.map((p) => (
             <a href={`/blog/${p.id}`} class="post-card">

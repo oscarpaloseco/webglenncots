@@ -3,6 +3,12 @@ import Base from "../layouts/Base.astro";
 import Figure from "../components/Figure.astro";
 import { servicios } from "../data/servicios";
 import { site } from "../data/site";
+
+const accent = (str: string) => {
+  const t = str.trimEnd();
+  const i = t.lastIndexOf(" ");
+  return i === -1 ? t : `${t.slice(0, i)} <em>${t.slice(i + 1)}</em>`;
+};
 ---
 
 <Base
@@ -32,7 +38,7 @@ import { site } from "../data/site";
               <span class="hub-card__num">{s.number}</span>
             </div>
             <div class="hub-card__body">
-              <h2 class="hub-card__title">{s.title}</h2>
+              <h2 class="hub-card__title" set:html={accent(s.title)} />
               <p class="hub-card__tag">{s.tagline}</p>
               <span class="hub-card__more">
                 Ver el área en detalle
@@ -49,7 +55,7 @@ import { site } from "../data/site";
     <div class="container">
       <div class="hub-cta" data-reveal>
         <div>
-          <h2>¿No sabes en qué área encajas?</h2>
+          <h2>¿No sabes en qué <em>área encajas</em>?</h2>
           <p class="lead">Es normal. Muchas veces los síntomas se solapan. En una primera visita lo valoramos juntas y trazamos el camino.</p>
         </div>
         <a href={site.bookingUrl} class="btn">

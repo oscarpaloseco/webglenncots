@@ -11,6 +11,13 @@ export async function getStaticPaths() {
 
 const { s } = Astro.props;
 const others = servicios.filter((x) => x.slug !== s.slug);
+
+// Combina las dos tipografías del título: la última palabra en serif itálica.
+const accent = (str: string) => {
+  const t = str.trimEnd();
+  const i = t.lastIndexOf(" ");
+  return i === -1 ? t : `${t.slice(0, i)} <em>${t.slice(i + 1)}</em>`;
+};
 const url = new URL(`/consulta/${s.slug}`, Astro.site ?? "https://glenncots.com").href;
 const base = (Astro.site ?? new URL("https://glenncots.com")).origin;
 
@@ -73,7 +80,7 @@ const jsonLd = {
       <div class="svc-hero__grid">
         <div class="svc-hero__copy" data-reveal>
           <p class="kicker"><span class="svc-num">{s.number}</span> {s.tagline}</p>
-          <h1>{s.h1}</h1>
+          <h1 set:html={accent(s.h1)} />
           <p class="lead">{s.intro}</p>
           <div class="svc-hero__actions">
             <a href={site.bookingUrl} class="btn">
@@ -94,7 +101,7 @@ const jsonLd = {
   <!-- Qué es / enfoque -->
   <section class="section--tight">
     <div class="container svc-prose" data-reveal>
-      <h2>{s.whatIs.heading}</h2>
+      <h2 set:html={accent(s.whatIs.heading)} />
       {s.whatIs.paragraphs.map((p) => <p>{p}</p>)}
     </div>
   </section>
@@ -103,7 +110,7 @@ const jsonLd = {
   <section class="section surface-sage">
     <div class="container">
       <header class="svc-head" data-reveal>
-        <h2>{s.symptoms.heading}</h2>
+        <h2 set:html={accent(s.symptoms.heading)} />
         <p class="lead">{s.symptoms.intro}</p>
       </header>
       <ul class="svc-symptoms" role="list" data-reveal>
@@ -121,7 +128,7 @@ const jsonLd = {
   <section class="section">
     <div class="container">
       <header class="svc-head" data-reveal>
-        <h2>{s.conditions.heading}</h2>
+        <h2 set:html={accent(s.conditions.heading)} />
         <p class="lead measure">{s.conditions.intro}</p>
       </header>
       <ul class="svc-conditions" role="list">
@@ -144,7 +151,7 @@ const jsonLd = {
   <section class="section surface-cream2">
     <div class="container">
       <header class="svc-head" data-reveal>
-        <h2>{s.approach.heading}</h2>
+        <h2 set:html={accent(s.approach.heading)} />
         <p class="lead measure">{s.approach.intro}</p>
       </header>
       <ol class="svc-steps" role="list">
@@ -163,7 +170,7 @@ const jsonLd = {
   <section class="section">
     <div class="container svc-two">
       <div class="svc-panel" data-reveal>
-        <h2>{s.includes.heading}</h2>
+        <h2 set:html={accent(s.includes.heading)} />
         <ul class="svc-list" role="list">
           {s.includes.items.map((it) => (
             <li>
@@ -176,7 +183,7 @@ const jsonLd = {
         </ul>
       </div>
       <div class="svc-panel" data-reveal style="--reveal-delay:100ms">
-        <h2>{s.forWhom.heading}</h2>
+        <h2 set:html={accent(s.forWhom.heading)} />
         <ul class="svc-list svc-list--arrow" role="list">
           {s.forWhom.items.map((it) => (
             <li>
@@ -196,7 +203,7 @@ const jsonLd = {
     <div class="container">
       <header class="svc-head" data-reveal>
         <p class="kicker">Preguntas frecuentes</p>
-        <h2>Lo que más me preguntáis</h2>
+        <h2>Lo que más me <em>preguntáis</em></h2>
       </header>
       <div class="svc-faq" data-reveal>
         {s.faqs.map((f) => (
@@ -212,7 +219,7 @@ const jsonLd = {
   <!-- Otras áreas -->
   <section class="section--tight">
     <div class="container">
-      <header class="svc-head" data-reveal><h2>Otras áreas de consulta</h2></header>
+      <header class="svc-head" data-reveal><h2>Otras áreas de <em>consulta</em></h2></header>
       <div class="svc-related">
         {others.map((o) => (
           <a href={`/consulta/${o.slug}`} class="svc-related__tile" data-reveal>
@@ -233,7 +240,7 @@ const jsonLd = {
   <section class="section--tight">
     <div class="container">
       <div class="svc-cta" data-reveal>
-        <h2>Empecemos a trabajar en tu caso</h2>
+        <h2>Empecemos a trabajar en tu <em>caso</em></h2>
         <p class="lead">Reserva tu primera visita y valoramos juntas tu situación. Consulta online y presencial.</p>
         <a href={site.bookingUrl} class="btn">Pide cita</a>
       </div>
