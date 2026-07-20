@@ -4,7 +4,7 @@ import { glob } from "astro/loaders";
 // CMS basado en Git: el contenido vive en /src/content y se versiona en el repo (el hub).
 // Editable a mano en Markdown o conectable a un editor visual (Decap/TinaCMS) más adelante.
 const blog = defineCollection({
-  loader: glob({ pattern: "**/*.md", base: "./src/content/blog" }),
+  loader: glob({ pattern: "**/*.mdoc", base: "./src/content/blog" }),
   schema: z.object({
     title: z.string(),
     excerpt: z.string(),
