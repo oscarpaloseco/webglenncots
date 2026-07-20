@@ -43,11 +43,11 @@ ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
   --on-forest:     #F4F1E6;   /* texto sobre verde */
   --on-forest-mut: #C6D2BE;   /* secundario sobre verde */
 
-  /* Tipografía */
-  --serif: "Spectral", Georgia, "Times New Roman", serif;
-  --sans:  "Hanken Grotesque", ui-sans-serif, system-ui, -apple-system, sans-serif;
-  --display-italic: "Instrument Serif", "Spectral", Georgia, serif; /* hero: serif italic */
-  --sans-alt: "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif; /* hero: sans */
+  /* Tipografía — Switzer (sans) + Instrument Serif italic (acento), como el hero */
+  --sans:  "Switzer", "Hanken Grotesque", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --serif: "Instrument Serif", "Spectral", Georgia, "Times New Roman", serif; /* siempre en itálica */
+  --display-italic: "Instrument Serif", "Spectral", Georgia, serif;
+  --sans-alt: "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   --step--1: clamp(0.82rem, 0.80rem + 0.10vw, 0.88rem);
   --step-0:  clamp(1.02rem, 0.98rem + 0.20vw, 1.14rem);
@@ -103,12 +103,21 @@ body {
 }
 
 h1, h2, h3, h4 {
-  font-family: var(--serif);
-  font-weight: 300;
-  line-height: 1.08;
-  letter-spacing: -0.015em;
+  font-family: var(--sans);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.022em;
   color: var(--forest);
   text-wrap: balance;
+}
+/* Acento serif itálica dentro de titulares (misma lógica que el hero) */
+h1 em, h2 em, h3 em, h4 em {
+  font-family: var(--display-italic);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.06em;
+  letter-spacing: -0.01em;
+  color: var(--terracotta);
 }
 h1 { font-size: var(--step-5); }
 h2 { font-size: var(--step-4); }
