@@ -69,12 +69,12 @@ import { site } from "../data/site";
   <!-- CTA -->
   <section class="section">
     <div class="container">
-      <div class="consulta-cta surface-forest" data-reveal>
+      <div class="consulta-cta" data-reveal>
         <div>
           <h2>¿No sabes en qué área encajas?</h2>
           <p class="lead">Es normal. Muchas veces los síntomas se solapan. En una primera visita lo valoramos juntas y trazamos el camino.</p>
         </div>
-        <a href={site.bookingUrl} class="btn btn--on-dark">
+        <a href={site.bookingUrl} class="btn">
           Pide cita
           <svg class="btn__arrow" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -126,6 +126,7 @@ import { site } from "../data/site";
 
   .consulta-cta {
     border-radius: var(--r-lg); padding: clamp(2rem, 1.4rem + 3vw, 3.5rem);
+    background: var(--bg-2); border: 1px solid var(--line);
     display: grid; gap: var(--space-m); align-items: center;
   }
   @media (min-width: 820px) { .consulta-cta { grid-template-columns: 1.6fr auto; gap: var(--space-l); } }

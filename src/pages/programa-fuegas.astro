@@ -24,18 +24,18 @@ const incluye = [
   title="Programa FUEGAS · Glenn Cots"
   description="FUEGAS: un programa de acompañamiento en grupo para reconectar con tu energía, tus hábitos y tu salud, con seguimiento cercano."
 >
-  <section class="fuegas-hero surface-forest">
+  <section class="fuegas-hero">
     <div class="container fuegas-hero__grid">
       <div class="fuegas-hero__copy" data-reveal>
-        <span class="badge" style="background:rgba(244,241,230,.12);color:var(--on-forest);border-color:rgba(244,241,230,.25)">Acompañamiento en grupo</span>
+        <span class="badge">Acompañamiento en grupo</span>
         <h1>Programa <span class="fuegas-word">FUEGAS</span></h1>
         <p class="lead">
           Un programa para reavivar tu energía y reconstruir tus hábitos desde la raíz,
           en comunidad y con acompañamiento cercano durante todo el proceso.
         </p>
         <div class="fuegas-hero__actions">
-          <a href={site.bookingUrl} class="btn btn--on-dark">Quiero información</a>
-          <a href="#incluye" class="btn btn--on-dark btn--ghost">Qué incluye</a>
+          <a href={site.bookingUrl} class="btn">Quiero información</a>
+          <a href="#incluye" class="btn btn--ghost">Qué incluye</a>
         </div>
       </div>
       <div class="fuegas-hero__media" data-reveal style="--reveal-delay:100ms">
@@ -85,10 +85,10 @@ const incluye = [
 
   <section class="section">
     <div class="container">
-      <div class="cta-final__panel surface-forest" data-reveal style="text-align:center;display:grid;gap:var(--space-s);justify-items:center;border-radius:var(--r-lg);padding:clamp(2.2rem,1.4rem + 4vw,4.5rem)">
+      <div class="fuegas-cta" data-reveal>
         <h2>¿Te unes a la próxima edición?</h2>
         <p class="lead" style="max-width:46ch">Escríbeme y te cuento las fechas, el formato y cómo reservar tu plaza.</p>
-        <a href={site.bookingUrl} class="btn btn--on-dark">Quiero mi plaza</a>
+        <a href={site.bookingUrl} class="btn">Quiero mi plaza</a>
       </div>
     </div>
   </section>
@@ -99,8 +99,14 @@ const incluye = [
   .fuegas-hero__grid { display: grid; gap: var(--space-l); align-items: center; }
   @media (min-width: 880px) { .fuegas-hero__grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-xl); } }
   .fuegas-hero .lead { margin-top: var(--space-s); }
-  .fuegas-word { font-family: var(--display-italic); font-style: italic; font-weight: 400; color: var(--sage); }
+  .fuegas-word { font-family: var(--display-italic); font-style: italic; font-weight: 400; color: inherit; }
   .fuegas-hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-m); }
+
+  .fuegas-cta {
+    border-radius: var(--r-lg); background: var(--bg-2); border: 1px solid var(--line);
+    padding: clamp(2.4rem, 1.6rem + 4vw, 4.8rem);
+    text-align: center; display: grid; gap: var(--space-s); justify-items: center;
+  }
 
   .fuegas-head { margin-bottom: var(--space-l); text-align: center; display: grid; justify-items: center; gap: 0.5rem; }
   .pilares { display: grid; gap: var(--space-s); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }

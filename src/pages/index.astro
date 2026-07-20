@@ -230,20 +230,19 @@ const tickerImg = (id: string) =>
   <!-- ===== CTA FINAL ===== -->
   <section class="cta-final">
     <div class="container">
-      <div class="cta-final__panel surface-forest" data-reveal>
-        <div class="cta-final__glow" aria-hidden="true"></div>
-        <p class="kicker" style="color:var(--sage)">Empecemos</p>
+      <div class="cta-final__panel" data-reveal>
+        <p class="kicker">Empecemos</p>
         <h2>Da el primer paso hacia <em>tu salud</em></h2>
         <p class="lead">
           Reserva tu primera visita y trabajemos juntas en entender qué le pasa a tu
           cuerpo y cómo ayudarle. Consulta online y presencial.
         </p>
         <div class="cta-final__actions">
-          <a href={site.bookingUrl} class="btn btn--on-dark">
+          <a href={site.bookingUrl} class="btn">
             Pide cita
             <svg class="btn__arrow" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </a>
-          <a href={`mailto:${site.email}`} class="btn btn--on-dark btn--ghost">Escríbeme un email</a>
+          <a href={`mailto:${site.email}`} class="btn btn--ghost">Escríbeme un email</a>
         </div>
       </div>
     </div>
@@ -307,7 +306,7 @@ const tickerImg = (id: string) =>
     font-weight: 400;
     font-size: clamp(2.9rem, 1.5rem + 6.4vw, 6.4rem);
     letter-spacing: -0.01em;
-    color: #fff;
+    color: inherit;
   }
   .hero__lead {
     font-family: var(--sans-alt);
@@ -370,7 +369,7 @@ const tickerImg = (id: string) =>
   }
   .about__statement em {
     font-family: var(--display-italic); font-style: italic; font-weight: 400;
-    color: var(--terracotta); font-size: 1.05em;
+    color: inherit; font-size: 1.05em;
   }
   .about__label {
     font-family: var(--sans); font-weight: 600;
@@ -437,11 +436,15 @@ const tickerImg = (id: string) =>
   .post-card__title { font-size: var(--step-1); }
   .post-card__excerpt { color: var(--muted); font-size: 0.95rem; }
 
-  /* CTA */
+  /* CTA — panel claro */
   .cta-final { padding-block: var(--space-xl); }
-  .cta-final__panel { position: relative; overflow: hidden; border-radius: var(--r-lg); padding: clamp(2.2rem, 1.4rem + 4vw, 4.5rem); text-align: center; display: grid; gap: var(--space-s); justify-items: center; }
-  .cta-final__glow { position: absolute; inset: 0; background: radial-gradient(50% 80% at 50% 0%, color-mix(in srgb, var(--sage) 30%, transparent), transparent 70%); pointer-events: none; }
-  .cta-final__panel > * { position: relative; }
+  .cta-final__panel {
+    border-radius: var(--r-lg);
+    background: var(--bg-2);
+    border: 1px solid var(--line);
+    padding: clamp(2.4rem, 1.6rem + 4vw, 4.8rem);
+    text-align: center; display: grid; gap: var(--space-s); justify-items: center;
+  }
   .cta-final .lead { max-width: 48ch; }
   .cta-final__actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); justify-content: center; margin-top: var(--space-xs); }
 </style>

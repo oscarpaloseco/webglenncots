@@ -110,14 +110,15 @@ h1, h2, h3, h4 {
   color: var(--forest);
   text-wrap: balance;
 }
-/* Acento serif itálica dentro de titulares (misma lógica que el hero) */
+/* Acento serif itálica dentro de titulares — mismo color que el titular
+   (contraste solo de fuente, sin mezclar colores) */
 h1 em, h2 em, h3 em, h4 em {
   font-family: var(--display-italic);
   font-style: italic;
   font-weight: 400;
   font-size: 1.06em;
   letter-spacing: -0.01em;
-  color: var(--terracotta);
+  color: inherit;
 }
 h1 { font-size: var(--step-5); }
 h2 { font-size: var(--step-4); }
