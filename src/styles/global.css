@@ -20,28 +20,28 @@ ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
 
 /* ---- Tokens ---- */
 :root {
-  /* Superficie / papel (crema de bewellbykelly, elección de la clienta) */
-  --bg:            #FAF9F4;
-  --bg-2:          #F2F0E8;   /* alterno, un punto más profundo */
-  --sage-pale:     #E7EEE4;   /* superficie salvia clara (pale sage) */
+  /* Superficie — casi blanco (estilo bewell), muchísimo más blanco */
+  --bg:            #FCFBF8;   /* casi blanco, apenas cálido */
+  --bg-2:          #F6F1EA;   /* blush cream muy suave (alternancia sutil) */
+  --sage-pale:     #F2EEE6;   /* superficie cálida casi blanca */
 
-  /* Marca */
-  --forest:        #2E482C;   /* verde bosque — color de marca dominante */
-  --forest-deep:   #1E3319;   /* footer / drench */
-  --forest-700:    #3A5A37;
-  --sage:          #A9BBB1;   /* salvia */
-  --sage-500:      #8AA394;
-  --terracotta:    #A65A2A;   /* acento cálido */
-  --terracotta-soft:#C2703B;
-  --blush:         #D2B0A2;   /* piel / calidez en marcos e imágenes */
+  /* Tinta oscura (era verde) — ahora gris carbón cálido, neutro */
+  --forest:        #2B2925;   /* marca / titulares / botones */
+  --forest-deep:   #201E1A;   /* footer / paneles oscuros */
+  --forest-700:    #3C3A34;
+  --sage:          #CFC7B7;   /* greige neutro (antes verde) */
+  --sage-500:      #ADA593;
+  --terracotta:    #A65A2A;   /* ÚNICO acento cálido — uso mínimo */
+  --terracotta-soft:#BE6C3A;
+  --blush:         #D8BEAF;   /* calidez suave en imágenes/marcos */
 
   /* Tinta */
-  --ink:           #33322E;   /* texto principal — contraste ≥10:1 sobre crema */
-  --ink-soft:      #4C4A44;
-  --muted:         #5F5D56;   /* secundario — ≥5:1 sobre crema */
-  --line:          #E2DED2;   /* hairlines cálidas */
-  --on-forest:     #F4F1E6;   /* texto sobre verde */
-  --on-forest-mut: #C6D2BE;   /* secundario sobre verde */
+  --ink:           #2B2925;   /* texto principal */
+  --ink-soft:      #494640;
+  --muted:         #6F6B63;   /* secundario */
+  --line:          #ECE6DB;   /* hairlines cálidas */
+  --on-forest:     #F7F4EE;   /* texto sobre oscuro */
+  --on-forest-mut: #CBC5B9;   /* secundario sobre oscuro */
 
   /* Tipografía — Switzer (sans) + Instrument Serif italic (acento), como el hero */
   --sans:  "Switzer", "Hanken Grotesque", ui-sans-serif, system-ui, -apple-system, sans-serif;
@@ -74,9 +74,9 @@ ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
   --r-pill: 999px;
 
   /* Sombras cálidas */
-  --shadow-s: 0 1px 2px rgba(46, 41, 30, 0.05), 0 2px 6px rgba(46, 41, 30, 0.05);
-  --shadow-m: 0 4px 12px rgba(46, 41, 30, 0.06), 0 14px 34px rgba(46, 41, 30, 0.08);
-  --shadow-l: 0 10px 30px rgba(30, 51, 25, 0.10), 0 30px 60px rgba(30, 51, 25, 0.12);
+  --shadow-s: 0 1px 2px rgba(43, 41, 37, 0.04), 0 2px 6px rgba(43, 41, 37, 0.04);
+  --shadow-m: 0 4px 12px rgba(43, 41, 37, 0.05), 0 14px 34px rgba(43, 41, 37, 0.06);
+  --shadow-l: 0 10px 30px rgba(43, 41, 37, 0.08), 0 30px 60px rgba(43, 41, 37, 0.10);
 
   --content: 74rem;   /* ancho máx layout */
   --measure: 62ch;    /* medida de lectura */
