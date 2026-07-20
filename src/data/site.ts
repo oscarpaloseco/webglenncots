@@ -5,7 +5,8 @@ export const site = {
   email: "hola@glenncots.com",
   instagram: "https://instagram.com/",
   bookingUrl: "/contacto",
-  productsUrl: "https://drabertapedreno.com/alimentacion/",
+  // Pendiente: enlace real de "Productos recomendados". De momento va a contacto.
+  productsUrl: "/contacto",
 };
 
 export type NavChild = { label: string; href: string; desc?: string };
@@ -29,7 +30,7 @@ export const nav: NavItem[] = [
     children: [
       { label: "Programa FUEGAS", href: "/programa-fuegas", desc: "Acompañamiento en grupo" },
       { label: "Ebooks y recursos", href: "/ebooks", desc: "Guías descargables" },
-      { label: "Productos recomendados", href: "https://drabertapedreno.com/alimentacion/", desc: "Selección de confianza" },
+      { label: "Productos recomendados", href: "/contacto", desc: "Selección de confianza" },
     ],
   },
   { label: "Sobre mí", href: "/sobre-mi" },
