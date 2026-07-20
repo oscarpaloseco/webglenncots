@@ -16,6 +16,20 @@ const method = [
   { n: "03", t: "Acompañamiento", d: "Revisiones y ajustes constantes. Estoy contigo en el proceso, también cuando aparecen las dudas y las recaídas." },
   { n: "04", t: "Hábitos sostenibles", d: "El objetivo no es una dieta más, sino cambios que se sostienen en el tiempo y te devuelven autonomía." },
 ];
+
+// Ticker: palabras alternadas con imágenes (estilo bewellbykelly)
+const ticker = [
+  { w: "Hipotiroidismo", img: "photo-1505576399279-565b52d4ac71" },
+  { w: "Hashimoto", img: "photo-1519708227418-c8fd9a32b7a2" },
+  { w: "SIBO", img: "photo-1490645935967-10de6ba17061" },
+  { w: "Permeabilidad intestinal", img: "photo-1519996529931-28324d5a630e" },
+  { w: "Psoriasis", img: "photo-1466637574441-749b8f19452f" },
+  { w: "Resistencia a la insulina", img: "photo-1512621776951-a57141f2eefd" },
+  { w: "Enfermedad celíaca", img: "photo-1607532941433-304659e8198a" },
+  { w: "Colitis y Crohn", img: "photo-1543362906-acfc16c67564" },
+];
+const tickerImg = (id: string) =>
+  `https://images.unsplash.com/${id}?auto=format&fit=crop&q=80&w=160&h=160`;
 ---
 
 <Base>
@@ -63,53 +77,37 @@ const method = [
     </span>
   </section>
 
-  <!-- ===== MARQUEE ===== -->
-  <section class="marquee surface-forest" aria-hidden="true">
-    <div class="marquee__track">
+  <!-- ===== TICKER (texto + imágenes) ===== -->
+  <section class="ticker" aria-label="Áreas que trabajo">
+    <div class="ticker__track">
       {Array.from({ length: 2 }).map(() => (
-        <span class="marquee__group">
-          <span>Hipotiroidismo</span><span class="dot">·</span>
-          <span>Hashimoto</span><span class="dot">·</span>
-          <span>SIBO</span><span class="dot">·</span>
-          <span>Permeabilidad intestinal</span><span class="dot">·</span>
-          <span>Psoriasis</span><span class="dot">·</span>
-          <span>Resistencia a la insulina</span><span class="dot">·</span>
-          <span>Enfermedad celíaca</span><span class="dot">·</span>
-          <span>Colitis y Crohn</span><span class="dot">·</span>
-        </span>
+        <div class="ticker__group" aria-hidden="true">
+          {ticker.map((t) => (
+            <>
+              <span class="ticker__word">{t.w}</span>
+              <span class="ticker__img"><img src={tickerImg(t.img)} alt="" loading="lazy" decoding="async" width="120" height="120" /></span>
+            </>
+          ))}
+        </div>
       ))}
     </div>
   </section>
 
-  <!-- ===== PRESENTACIÓN ===== -->
+  <!-- ===== PRESENTACIÓN (image-with-text, estilo bewell) ===== -->
   <section class="section about">
     <div class="container about__grid">
       <div class="about__media" data-reveal>
-        <Figure id="photo-1556911220-bff31c812dba" alt="Manos preparando alimentos frescos sobre una encimera" ratio="4 / 5" class="about__img" sizes="(min-width:900px) 38vw, 100vw" />
-        <div class="about__card">
-          <p class="about__card-num">2016</p>
-          <p class="about__card-txt">Diagnóstico de Hashimoto que lo cambió todo</p>
-        </div>
+        <Figure id="photo-1556911220-bff31c812dba" alt="Manos preparando alimentos frescos sobre una encimera" ratio="5 / 6" class="about__img" sizes="(min-width:820px) 44vw, 100vw" />
       </div>
-      <div class="about__copy stack" data-reveal style="--reveal-delay:100ms">
-        <p class="kicker">Quién soy</p>
-        <h2>De paciente a <em>dietista-nutricionista</em></h2>
-        <p class="lead">
-          Mi interés por la alimentación viene de lejos, pero se convirtió en vocación
-          cuando, en mi primer año estudiando dietética, me diagnosticaron hipotiroidismo
-          de Hashimoto.
+      <div class="about__copy" data-reveal style="--reveal-delay:100ms">
+        <p class="about__statement">
+          <span class="about__label">Quién soy —</span>
+          Soy Glenn Cots, dietista-nutricionista especializada en tiroides y
+          autoinmunidad, y también <em>paciente de Hashimoto</em>. No creo en
+          las dietas milagro, sino en entender la causa raíz de cada síntoma y
+          construir cambios de hábitos sostenibles.
         </p>
-        <p>
-          Esa experiencia me llevó a querer entender a fondo cómo funciona el cuerpo y
-          cómo la alimentación influye en él. Hoy combino mi formación en Nutrición Humana
-          y Dietética y en Psiconeuroinmunología con mi propia vivencia como paciente
-          autoinmune para acompañar a otras personas en su proceso.
-        </p>
-        <p>
-          No creo en las dietas milagro ni en las etiquetas rígidas, sino en entender la
-          causa raíz de cada síntoma y construir cambios de hábitos sostenibles.
-        </p>
-        <a href="/sobre-mi" class="link-underline">
+        <a href="/sobre-mi" class="link-underline about__link">
           Conoce mi historia
           <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </a>
@@ -345,25 +343,50 @@ const method = [
   @keyframes heroScroll { 0% { transform: translateY(-100%); } 60%,100% { transform: translateY(100%); } }
   @media (prefers-reduced-motion: reduce) { .hero__scroll-line { animation: none; } }
 
-  /* MARQUEE */
-  .marquee { overflow: hidden; padding-block: 0.9rem; }
-  .marquee__track { display: flex; width: max-content; animation: marquee 42s linear infinite; }
-  .marquee__group { display: inline-flex; align-items: center; gap: 1.3rem; padding-right: 1.3rem; font-family: var(--serif); font-size: clamp(1.1rem, 0.9rem + 1vw, 1.7rem); color: var(--on-forest); white-space: nowrap; }
-  .marquee .dot { color: var(--sage); }
-  @keyframes marquee { to { transform: translateX(-50%); } }
-  @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; } }
-
-  /* ABOUT */
-  .about__grid { display: grid; gap: var(--space-l); align-items: center; }
-  @media (min-width: 820px) { .about__grid { grid-template-columns: 0.85fr 1.15fr; gap: var(--space-xl); } }
-  .about__media { position: relative; }
-  .about__card {
-    position: absolute; right: -0.8rem; bottom: -1.2rem;
-    background: var(--bg); border: 1px solid var(--line); border-radius: var(--r);
-    padding: var(--space-s) var(--space-m); box-shadow: var(--shadow-m); max-width: 15rem;
+  /* TICKER — texto + imágenes (estilo bewellbykelly) */
+  .ticker { overflow: hidden; padding-block: clamp(0.9rem, 0.6rem + 1vw, 1.6rem); background: var(--bg-2); border-block: 1px solid var(--line); }
+  .ticker__track { display: flex; width: max-content; animation: ticker 55s linear infinite; }
+  .ticker__group { display: inline-flex; align-items: center; }
+  .ticker__word {
+    font-family: var(--display-italic); font-style: italic;
+    font-size: clamp(1.4rem, 1rem + 1.7vw, 2.5rem);
+    color: var(--forest); white-space: nowrap;
+    padding-inline: clamp(0.7rem, 1.4vw, 1.5rem);
   }
-  .about__card-num { font-family: var(--serif); font-size: 1.9rem; color: var(--terracotta); line-height: 1; }
-  .about__card-txt { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem; }
+  .ticker__img {
+    flex: none; width: clamp(46px, 5.2vw, 70px); aspect-ratio: 1;
+    margin-inline: clamp(0.35rem, 0.9vw, 0.8rem);
+    border-radius: var(--r); overflow: hidden;
+  }
+  .ticker__img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ticker__track:hover { animation-play-state: paused; }
+  @keyframes ticker { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .ticker__track { animation: none; } }
+
+  /* ABOUT — image-with-text (una declaración editorial, estilo bewell) */
+  .about__grid { display: grid; gap: var(--space-l); align-items: center; }
+  @media (min-width: 820px) { .about__grid { grid-template-columns: 0.82fr 1.18fr; gap: clamp(2.5rem, 5vw, 5rem); } }
+  .about__media :global(.about__img) { border-radius: var(--r-lg); }
+  .about__statement {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(1.5rem, 1.1rem + 1.7vw, 2.4rem);
+    line-height: 1.32;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .about__statement em {
+    font-family: var(--display-italic); font-style: italic; font-weight: 400;
+    color: var(--terracotta); font-size: 1.05em;
+  }
+  .about__label {
+    font-family: var(--sans); font-weight: 600;
+    font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--terracotta); white-space: nowrap;
+    margin-right: 0.35rem; vertical-align: 0.18em;
+  }
+  .about__link { margin-top: var(--space-m); }
 
   /* AREAS */
   .areas__head { display: grid; gap: var(--space-s); margin-bottom: var(--space-l); }
