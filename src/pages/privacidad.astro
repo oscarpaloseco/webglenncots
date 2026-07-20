@@ -1,0 +1,40 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+---
+<Base title="Política de privacidad · Glenn Cots" description="Política de privacidad y tratamiento de datos del sitio web de Glenn Cots.">
+  <section class="legal">
+    <div class="container legal__inner">
+      <a href="/" class="legal__back">← Inicio</a>
+      <h1>Política de privacidad</h1>
+      <p class="legal__note">Plantilla de referencia. Pendiente de adaptar al RGPD con los datos definitivos del responsable del tratamiento.</p>
+
+      <h2>Responsable</h2>
+      <p>Glenn Cots — Dietista-Nutricionista. Contacto: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <h2>Finalidad</h2>
+      <p>Los datos que facilitas a través del formulario de contacto se utilizan únicamente para responder a tu consulta y, en su caso, gestionar tu cita. No se ceden a terceros salvo obligación legal.</p>
+
+      <h2>Legitimación</h2>
+      <p>La base legal es tu consentimiento al enviar el formulario.</p>
+
+      <h2>Derechos</h2>
+      <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <h2>Conservación</h2>
+      <p>Conservaremos tus datos el tiempo necesario para atender tu solicitud y cumplir las obligaciones legales aplicables.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal { padding-block: clamp(2.5rem, 1.8rem + 3vw, 4.5rem) var(--space-2xl); }
+  .legal__inner { max-width: 44rem; display: grid; gap: var(--space-s); }
+  .legal__back { color: var(--muted); font-weight: 500; width: max-content; }
+  .legal__back:hover { color: var(--forest); }
+  .legal h1 { font-size: var(--step-4); margin-top: var(--space-s); }
+  .legal h2 { font-size: var(--step-1); margin-top: var(--space-m); }
+  .legal p { color: var(--ink-soft); }
+  .legal a { color: var(--forest); text-decoration: underline; }
+  .legal__note { font-size: 0.9rem; color: var(--muted); background: var(--sage-pale); padding: 0.8em 1em; border-radius: var(--r); }
+</style>

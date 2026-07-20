@@ -1,0 +1,391 @@
+---
+import Base from "../layouts/Base.astro";
+import Portrait from "../components/Portrait.astro";
+import Figure from "../components/Figure.astro";
+import AreaIcon from "../components/AreaIcon.astro";
+import { areas } from "../data/areas";
+import { site } from "../data/site";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const method = [
+  { n: "01", t: "Causa raíz", d: "Analizamos tu historia, tus analíticas y tus síntomas para entender qué los origina, no solo para taparlos." },
+  { n: "02", t: "Plan personalizado", d: "Un abordaje a tu medida: alimentación, cronobiología, suplementación justa y estilo de vida. Nada de plantillas." },
+  { n: "03", t: "Acompañamiento", d: "Revisiones y ajustes constantes. Estoy contigo en el proceso, también cuando aparecen las dudas y las recaídas." },
+  { n: "04", t: "Hábitos sostenibles", d: "El objetivo no es una dieta más, sino cambios que se sostienen en el tiempo y te devuelven autonomía." },
+];
+---
+
+<Base>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__copy">
+        <p class="kicker" data-reveal>Dietista-Nutricionista · Tiroides y autoinmunidad</p>
+        <h1 data-reveal style="--reveal-delay:60ms">
+          Tu salud, entendida <em>desde&nbsp;dentro</em>.
+        </h1>
+        <p class="lead hero__lead" data-reveal style="--reveal-delay:140ms">
+          Soy Glenn Cots. Acompaño a personas con patología tiroidea, enfermedades
+          autoinmunes y problemas digestivos a recuperar su salud tratando la causa
+          raíz, con nutrición clínica y PNI.
+        </p>
+        <div class="hero__actions" data-reveal style="--reveal-delay:220ms">
+          <a href={site.bookingUrl} class="btn">
+            Pide cita
+            <svg class="btn__arrow" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href="/consulta" class="btn btn--ghost">Ver áreas de consulta</a>
+        </div>
+        <ul class="hero__trust" role="list" data-reveal style="--reveal-delay:300ms">
+          <li><strong>Nutrición Humana y Dietética</strong> · UVIC</li>
+          <li><strong>Formación en PNI</strong> · SoyPro</li>
+          <li><strong>Paciente de Hashimoto</strong></li>
+        </ul>
+      </div>
+
+      <div class="hero__media" data-reveal style="--reveal-delay:120ms">
+        <Portrait label="Retrato de Glenn" ratio="4 / 5" class="hero__portrait" />
+        <a href={site.bookingUrl} class="hero__badge" aria-label="Pide cita">
+          <span class="hero__badge-ring" aria-hidden="true">
+            <svg viewBox="0 0 100 100">
+              <defs><path id="hero-circle" d="M50,50 m-36,0 a36,36 0 1,1 72,0 a36,36 0 1,1 -72,0" /></defs>
+              <text><textPath href="#hero-circle" startOffset="0%">Reserva tu primera visita · Reserva tu primera visita · </textPath></text>
+            </svg>
+          </span>
+          <svg class="hero__badge-arrow" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <span class="hero__leaf hero__leaf--1" aria-hidden="true"></span>
+        <span class="hero__leaf hero__leaf--2" aria-hidden="true"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MARQUEE ===== -->
+  <section class="marquee surface-forest" aria-hidden="true">
+    <div class="marquee__track">
+      {Array.from({ length: 2 }).map(() => (
+        <span class="marquee__group">
+          <span>Hipotiroidismo</span><span class="dot">·</span>
+          <span>Hashimoto</span><span class="dot">·</span>
+          <span>SIBO</span><span class="dot">·</span>
+          <span>Permeabilidad intestinal</span><span class="dot">·</span>
+          <span>Psoriasis</span><span class="dot">·</span>
+          <span>Resistencia a la insulina</span><span class="dot">·</span>
+          <span>Enfermedad celíaca</span><span class="dot">·</span>
+          <span>Colitis y Crohn</span><span class="dot">·</span>
+        </span>
+      ))}
+    </div>
+  </section>
+
+  <!-- ===== PRESENTACIÓN ===== -->
+  <section class="section about">
+    <div class="container about__grid">
+      <div class="about__media" data-reveal>
+        <Figure id="photo-1556911220-bff31c812dba" alt="Manos preparando alimentos frescos sobre una encimera" ratio="4 / 5" class="about__img" sizes="(min-width:900px) 38vw, 100vw" />
+        <div class="about__card">
+          <p class="about__card-num">2016</p>
+          <p class="about__card-txt">Diagnóstico de Hashimoto que lo cambió todo</p>
+        </div>
+      </div>
+      <div class="about__copy stack" data-reveal style="--reveal-delay:100ms">
+        <p class="kicker">Quién soy</p>
+        <h2>De paciente a dietista-nutricionista</h2>
+        <p class="lead">
+          Mi interés por la alimentación viene de lejos, pero se convirtió en vocación
+          cuando, en mi primer año estudiando dietética, me diagnosticaron hipotiroidismo
+          de Hashimoto.
+        </p>
+        <p>
+          Esa experiencia me llevó a querer entender a fondo cómo funciona el cuerpo y
+          cómo la alimentación influye en él. Hoy combino mi formación en Nutrición Humana
+          y Dietética y en Psiconeuroinmunología con mi propia vivencia como paciente
+          autoinmune para acompañar a otras personas en su proceso.
+        </p>
+        <p>
+          No creo en las dietas milagro ni en las etiquetas rígidas, sino en entender la
+          causa raíz de cada síntoma y construir cambios de hábitos sostenibles.
+        </p>
+        <a href="/sobre-mi" class="link-underline">
+          Conoce mi historia
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ÁREAS ===== -->
+  <section class="section surface-sage areas" id="areas">
+    <div class="container">
+      <header class="areas__head" data-reveal>
+        <div>
+          <p class="kicker">Consulta de nutrición</p>
+          <h2>Cuatro áreas, un mismo enfoque</h2>
+        </div>
+        <p class="areas__intro">
+          Cada persona es un caso. Trabajo la interconexión entre intestino, sistema
+          inmune y hormonas para tratar el origen, no solo el síntoma.
+        </p>
+      </header>
+
+      <div class="areas__grid">
+        {areas.map((area, i) => (
+          <a href={`/consulta#${area.id}`} class="area-card" data-reveal style={`--reveal-delay:${i * 90}ms`}>
+            <div class="area-card__top">
+              <span class="area-card__icon"><AreaIcon name={area.icon} size={24} /></span>
+              <span class="area-card__num eyebrow-num">{area.number}</span>
+            </div>
+            <h3 class="area-card__title">{area.title}</h3>
+            <p class="area-card__intro">{area.intro}</p>
+            <span class="area-card__more">
+              Ver detalle
+              <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MÉTODO ===== -->
+  <section class="section method">
+    <div class="container">
+      <header class="method__head" data-reveal>
+        <p class="kicker">Cómo trabajo</p>
+        <h2>Un método, no una dieta</h2>
+        <p class="lead measure">
+          Nada de restricciones imposibles ni soluciones exprés. Un proceso ordenado
+          que te devuelve el control sobre tu salud.
+        </p>
+      </header>
+      <ol class="method__list" role="list">
+        {method.map((s, i) => (
+          <li class="method__step" data-reveal style={`--reveal-delay:${i * 80}ms`}>
+            <span class="method__num">{s.n}</span>
+            <h3 class="method__title">{s.t}</h3>
+            <p class="method__desc">{s.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== SERVICIOS ===== -->
+  <section class="section surface-cream2 services">
+    <div class="container">
+      <header class="services__head" data-reveal>
+        <p class="kicker">Más allá de la consulta</p>
+        <h2>Otros servicios</h2>
+      </header>
+      <div class="services__grid">
+        <a href="/programa-fuegas" class="service-card service-card--feature" data-reveal>
+          <div class="service-card__body">
+            <span class="badge">Acompañamiento en grupo</span>
+            <h3>Programa FUEGAS</h3>
+            <p>Un programa para reconectar con tu energía y tus hábitos, en comunidad y con acompañamiento cercano durante todo el proceso.</p>
+            <span class="link-underline">Descubre el programa
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+          <Figure id="photo-1540420773420-3366772f4999" alt="Persona cocinando alimentos frescos en una cocina luminosa" ratio="16 / 10" class="service-card__img" sizes="(min-width:900px) 42vw, 100vw" />
+        </a>
+
+        <a href="/ebooks" class="service-card" data-reveal style="--reveal-delay:90ms">
+          <span class="service-card__icon"><AreaIcon name="immune" size={22} /></span>
+          <h3>Ebooks y recursos</h3>
+          <p>Guías descargables sobre tiroides, salud digestiva y alimentación antiinflamatoria.</p>
+          <span class="service-card__more">Ver recursos →</span>
+        </a>
+
+        <a href={site.productsUrl} target="_blank" rel="noopener" class="service-card" data-reveal style="--reveal-delay:160ms">
+          <span class="service-card__icon"><AreaIcon name="metabolic" size={22} /></span>
+          <h3>Productos recomendados</h3>
+          <p>Mi selección de productos y suplementos de confianza para acompañar tu proceso.</p>
+          <span class="service-card__more">Ir a la selección ↗</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BLOG ===== -->
+  {posts.length > 0 && (
+    <section class="section blog-teaser">
+      <div class="container">
+        <header class="blog-teaser__head" data-reveal>
+          <div>
+            <p class="kicker">Desde el blog</p>
+            <h2>Recursos y divulgación</h2>
+          </div>
+          <a href="/blog" class="btn btn--ghost">Ver todo el blog</a>
+        </header>
+        <div class="blog-teaser__grid">
+          {posts.map((post, i) => (
+            <a href={`/blog/${post.id}`} class="post-card" data-reveal style={`--reveal-delay:${i * 90}ms`}>
+              <Figure id={post.data.image} alt={post.data.imageAlt} ratio="16 / 10" class="post-card__img" sizes="(min-width:900px) 30vw, 100vw" />
+              <div class="post-card__body">
+                <span class="post-card__cat">{post.data.category}</span>
+                <h3 class="post-card__title">{post.data.title}</h3>
+                <p class="post-card__excerpt">{post.data.excerpt}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- ===== CTA FINAL ===== -->
+  <section class="cta-final">
+    <div class="container">
+      <div class="cta-final__panel surface-forest" data-reveal>
+        <div class="cta-final__glow" aria-hidden="true"></div>
+        <p class="kicker" style="color:var(--sage)">Empecemos</p>
+        <h2>Da el primer paso hacia tu salud</h2>
+        <p class="lead">
+          Reserva tu primera visita y trabajemos juntas en entender qué le pasa a tu
+          cuerpo y cómo ayudarle. Consulta online y presencial.
+        </p>
+        <div class="cta-final__actions">
+          <a href={site.bookingUrl} class="btn btn--on-dark">
+            Pide cita
+            <svg class="btn__arrow" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a href={`mailto:${site.email}`} class="btn btn--on-dark btn--ghost">Escríbeme un email</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* HERO */
+  .hero { position: relative; padding-block: clamp(2.5rem, 1.5rem + 4vw, 5.5rem) var(--space-xl); overflow: clip; }
+  .hero::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background:
+      radial-gradient(60% 50% at 85% 0%, color-mix(in srgb, var(--sage-pale) 90%, transparent), transparent 70%),
+      radial-gradient(50% 45% at 0% 60%, color-mix(in srgb, var(--blush) 22%, transparent), transparent 70%);
+  }
+  .hero__grid { display: grid; gap: var(--space-l); align-items: center; }
+  @media (min-width: 880px) { .hero__grid { grid-template-columns: 1.08fr 0.92fr; gap: var(--space-xl); } }
+  .hero__lead { max-width: 46ch; margin-top: var(--space-s); }
+  .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-m); }
+  .hero__trust { display: flex; flex-wrap: wrap; gap: 0.5rem 1.4rem; margin-top: var(--space-l); font-size: 0.9rem; color: var(--muted); }
+  .hero__trust li { position: relative; padding-left: 1.1rem; }
+  .hero__trust li::before { content: ""; position: absolute; left: 0; top: 0.55em; width: 6px; height: 6px; border-radius: 50%; background: var(--terracotta); }
+  .hero__trust strong { color: var(--ink); font-weight: 600; }
+
+  .hero__copy h1 em { font-style: italic; color: var(--terracotta); }
+
+  .hero__media { position: relative; }
+  .hero__portrait { box-shadow: var(--shadow-l); }
+  .hero__badge {
+    position: absolute; left: -1.4rem; bottom: 2.2rem;
+    width: 104px; height: 104px; display: grid; place-items: center; color: var(--on-forest);
+  }
+  .hero__badge::before { content: ""; position: absolute; inset: 12px; background: var(--forest); border-radius: 50%; box-shadow: var(--shadow-m); transition: transform .4s cubic-bezier(.16,1,.3,1), background-color .3s; }
+  .hero__badge:hover::before { transform: scale(1.06); background: var(--forest-deep); }
+  .hero__badge-ring { position: absolute; inset: 0; color: var(--forest); }
+  .hero__badge-ring svg { width: 100%; height: 100%; animation: heroSpin 20s linear infinite; }
+  .hero__badge-ring text { font-family: var(--sans); font-size: 8.4px; font-weight: 600; letter-spacing: 0.01em; fill: var(--forest); text-transform: uppercase; }
+  .hero__badge-arrow { position: relative; z-index: 1; transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .hero__badge:hover .hero__badge-arrow { transform: rotate(45deg); }
+  @keyframes heroSpin { to { transform: rotate(360deg); } }
+  @media (prefers-reduced-motion: reduce) { .hero__badge-ring svg { animation: none; } }
+  @media (max-width: 480px) { .hero__badge { width: 84px; height: 84px; left: -0.5rem; } }
+
+  .hero__leaf { position: absolute; border-radius: 60% 40% 55% 45%; filter: blur(0.5px); opacity: 0.55; }
+  .hero__leaf--1 { width: 70px; height: 70px; background: var(--sage); top: -1rem; right: 2rem; }
+  .hero__leaf--2 { width: 42px; height: 42px; background: var(--blush); bottom: -0.8rem; right: -0.6rem; opacity: 0.65; }
+
+  /* MARQUEE */
+  .marquee { overflow: hidden; padding-block: 0.9rem; }
+  .marquee__track { display: flex; width: max-content; animation: marquee 42s linear infinite; }
+  .marquee__group { display: inline-flex; align-items: center; gap: 1.3rem; padding-right: 1.3rem; font-family: var(--serif); font-size: clamp(1.1rem, 0.9rem + 1vw, 1.7rem); color: var(--on-forest); white-space: nowrap; }
+  .marquee .dot { color: var(--sage); }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee__track { animation: none; flex-wrap: wrap; width: auto; justify-content: center; } }
+
+  /* ABOUT */
+  .about__grid { display: grid; gap: var(--space-l); align-items: center; }
+  @media (min-width: 820px) { .about__grid { grid-template-columns: 0.85fr 1.15fr; gap: var(--space-xl); } }
+  .about__media { position: relative; }
+  .about__card {
+    position: absolute; right: -0.8rem; bottom: -1.2rem;
+    background: var(--bg); border: 1px solid var(--line); border-radius: var(--r);
+    padding: var(--space-s) var(--space-m); box-shadow: var(--shadow-m); max-width: 15rem;
+  }
+  .about__card-num { font-family: var(--serif); font-size: 1.9rem; color: var(--terracotta); line-height: 1; }
+  .about__card-txt { font-size: 0.9rem; color: var(--muted); margin-top: 0.3rem; }
+
+  /* AREAS */
+  .areas__head { display: grid; gap: var(--space-s); margin-bottom: var(--space-l); }
+  @media (min-width: 820px) { .areas__head { grid-template-columns: 1.2fr 1fr; align-items: end; } }
+  .areas__intro { color: var(--ink-soft); max-width: 42ch; }
+  .areas__grid { display: grid; gap: var(--space-s); grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .area-card {
+    display: flex; flex-direction: column; gap: 0.7rem;
+    background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg);
+    padding: var(--space-m); min-height: 100%;
+    transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s, border-color .3s;
+  }
+  .area-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-m); border-color: var(--sage); }
+  .area-card__top { display: flex; align-items: center; justify-content: space-between; }
+  .area-card__icon { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: var(--sage-pale); color: var(--forest); }
+  .area-card__num { font-size: 1.3rem; }
+  .area-card__title { font-size: var(--step-1); line-height: 1.15; }
+  .area-card__intro { font-size: 0.94rem; color: var(--muted); flex: 1; }
+  .area-card__more { display: inline-flex; align-items: center; gap: 0.4rem; font-weight: 600; font-size: 0.9rem; color: var(--forest); margin-top: 0.2rem; }
+  .area-card:hover .area-card__more { color: var(--terracotta); }
+
+  /* MÉTODO */
+  .method__head { max-width: 60ch; margin-bottom: var(--space-l); display: grid; gap: 0.6rem; }
+  .method__list { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .method__step { position: relative; padding-top: var(--space-m); border-top: 2px solid var(--forest); }
+  .method__num { font-family: var(--serif); font-style: italic; font-size: 1.5rem; color: var(--terracotta); }
+  .method__title { font-size: var(--step-1); margin-top: 0.3rem; }
+  .method__desc { color: var(--muted); font-size: 0.96rem; margin-top: 0.4rem; }
+
+  /* SERVICIOS */
+  .services__head { margin-bottom: var(--space-l); }
+  .services__grid { display: grid; gap: var(--space-s); grid-template-columns: 1fr; }
+  @media (min-width: 760px) { .services__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1020px) { .services__grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+  .service-card {
+    display: flex; flex-direction: column; gap: 0.6rem;
+    background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg);
+    padding: var(--space-m); transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-m); }
+  .service-card__icon { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 12px; background: var(--sage-pale); }
+  .service-card h3 { font-size: var(--step-1); }
+  .service-card p { color: var(--muted); font-size: 0.96rem; flex: 1; }
+  .service-card__more { font-weight: 600; color: var(--forest); font-size: 0.92rem; }
+  .service-card--feature { grid-row: span 2; padding: 0; overflow: hidden; }
+  @media (min-width: 1020px) { .service-card--feature { grid-column: 1; grid-row: 1 / span 2; } }
+  .service-card--feature .service-card__body { padding: var(--space-m); display: flex; flex-direction: column; gap: 0.7rem; }
+  .service-card--feature :global(.service-card__img) { border-radius: 0; margin-top: auto; }
+
+  /* BLOG */
+  .blog-teaser__head { display: flex; flex-wrap: wrap; gap: var(--space-s); justify-content: space-between; align-items: end; margin-bottom: var(--space-l); }
+  .blog-teaser__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+  .post-card { display: flex; flex-direction: column; gap: 0.85rem; }
+  .post-card :global(.post-card__img) { transition: transform .5s cubic-bezier(.16,1,.3,1); }
+  .post-card:hover :global(.post-card__img) img { transform: scale(1.04); }
+  .post-card__body { display: flex; flex-direction: column; gap: 0.4rem; }
+  .post-card__cat { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--terracotta); }
+  .post-card__title { font-size: var(--step-1); }
+  .post-card__excerpt { color: var(--muted); font-size: 0.95rem; }
+
+  /* CTA */
+  .cta-final { padding-block: var(--space-xl); }
+  .cta-final__panel { position: relative; overflow: hidden; border-radius: var(--r-lg); padding: clamp(2.2rem, 1.4rem + 4vw, 4.5rem); text-align: center; display: grid; gap: var(--space-s); justify-items: center; }
+  .cta-final__glow { position: absolute; inset: 0; background: radial-gradient(50% 80% at 50% 0%, color-mix(in srgb, var(--sage) 30%, transparent), transparent 70%); pointer-events: none; }
+  .cta-final__panel > * { position: relative; }
+  .cta-final .lead { max-width: 48ch; }
+  .cta-final__actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); justify-content: center; margin-top: var(--space-xs); }
+</style>

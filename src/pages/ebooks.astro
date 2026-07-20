@@ -1,0 +1,108 @@
+---
+import Base from "../layouts/Base.astro";
+import AreaIcon from "../components/AreaIcon.astro";
+import { site } from "../data/site";
+
+const ebooks = [
+  { icon: "thyroid", title: "Guía de la tiroides", desc: "Entiende tu analítica, los cofactores clave y los primeros cambios que marcan la diferencia en el hipotiroidismo y el Hashimoto.", tag: "Tiroides", pages: "28 páginas" },
+  { icon: "gut", title: "Reset digestivo", desc: "Claves para mejorar digestiones, reducir hinchazón y cuidar tu microbiota desde la alimentación.", tag: "Digestivo", pages: "24 páginas" },
+  { icon: "immune", title: "Plato antiinflamatorio", desc: "Cómo construir comidas que calman la inflamación, con ejemplos, listas de la compra y recetas base.", tag: "Autoinmunidad", pages: "32 páginas" },
+] as const;
+---
+
+<Base
+  title="Ebooks y recursos · Glenn Cots"
+  description="Guías descargables sobre tiroides, salud digestiva y alimentación antiinflamatoria. Recursos prácticos para empezar a cuidarte hoy."
+>
+  <section class="page-hero">
+    <div class="container center-hero">
+      <p class="kicker" data-reveal style="justify-content:center">Ebooks y recursos</p>
+      <h1 data-reveal style="--reveal-delay:60ms">Recursos para empezar a cuidarte hoy</h1>
+      <p class="lead measure" data-reveal style="--reveal-delay:120ms; margin-inline:auto">
+        Guías prácticas y descargables para dar los primeros pasos por tu cuenta, mientras
+        decides si quieres un acompañamiento personalizado en consulta.
+      </p>
+    </div>
+  </section>
+
+  <section class="section--tight">
+    <div class="container">
+      <div class="ebooks__grid">
+        {ebooks.map((e, i) => (
+          <article class="ebook" data-reveal style={`--reveal-delay:${i * 80}ms`}>
+            <div class="ebook__cover">
+              <span class="ebook__icon"><AreaIcon name={e.icon} size={30} /></span>
+              <span class="ebook__tag">{e.tag}</span>
+            </div>
+            <div class="ebook__body">
+              <h3>{e.title}</h3>
+              <p>{e.desc}</p>
+              <div class="ebook__foot">
+                <span class="ebook__pages">{e.pages}</span>
+                <a href={site.bookingUrl} class="link-underline">Descargar
+                  <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 3v8m0 0 3-3m-3 3-3-3M3 13h10" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="newsletter surface-forest" data-reveal>
+        <div class="newsletter__copy">
+          <p class="kicker" style="color:var(--sage)">Newsletter</p>
+          <h2>Recibe recursos y recetas</h2>
+          <p class="lead">Contenido sobre tiroides, autoinmunidad y salud digestiva, directo a tu correo. Sin spam, solo cosas útiles.</p>
+        </div>
+        <form class="newsletter__form" data-newsletter>
+          <label class="sr-only" for="nl-email">Tu email</label>
+          <input id="nl-email" type="email" name="email" required placeholder="tu@email.com" autocomplete="email" />
+          <button type="submit" class="btn btn--on-dark">Suscribirme</button>
+          <p class="newsletter__note" data-nl-note hidden>¡Gracias! Te escribiré pronto.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-hero { padding-block: clamp(2.5rem, 1.8rem + 3vw, 4.5rem) var(--space-s); }
+  .center-hero { text-align: center; display: grid; justify-items: center; gap: var(--space-s); }
+
+  .ebooks__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+  .ebook { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; display: flex; flex-direction: column; transition: transform .4s cubic-bezier(.16,1,.3,1), box-shadow .4s; }
+  .ebook:hover { transform: translateY(-5px); box-shadow: var(--shadow-m); }
+  .ebook__cover { position: relative; aspect-ratio: 16 / 10; display: grid; place-items: center; background: radial-gradient(120% 120% at 20% 0%, var(--sage-pale), color-mix(in srgb, var(--sage) 40%, var(--bg))); }
+  .ebook__icon { display: grid; place-items: center; width: 68px; height: 68px; border-radius: 18px; background: var(--bg); box-shadow: var(--shadow-s); color: var(--forest); }
+  .ebook__tag { position: absolute; top: 0.9rem; left: 0.9rem; font-size: 0.74rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--forest); background: color-mix(in srgb, var(--bg) 85%, transparent); padding: 0.3em 0.7em; border-radius: var(--r-pill); }
+  .ebook__body { padding: var(--space-m); display: flex; flex-direction: column; gap: 0.55rem; flex: 1; }
+  .ebook__body h3 { font-size: var(--step-1); }
+  .ebook__body p { color: var(--muted); font-size: 0.95rem; flex: 1; }
+  .ebook__foot { display: flex; align-items: center; justify-content: space-between; margin-top: 0.4rem; padding-top: var(--space-s); border-top: 1px solid var(--line); }
+  .ebook__pages { font-size: 0.85rem; color: var(--muted); }
+
+  .newsletter { border-radius: var(--r-lg); padding: clamp(2rem, 1.4rem + 3vw, 3.5rem); display: grid; gap: var(--space-m); align-items: center; }
+  @media (min-width: 820px) { .newsletter { grid-template-columns: 1.2fr 1fr; gap: var(--space-xl); } }
+  .newsletter__copy .lead { margin-top: 0.5rem; }
+  .newsletter__form { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .newsletter__form input { flex: 1; min-width: 200px; padding: 0.9em 1.1em; border-radius: var(--r-pill); border: 1px solid rgba(244,241,230,.3); background: rgba(244,241,230,.08); color: var(--on-forest); }
+  .newsletter__form input::placeholder { color: var(--on-forest-mut); }
+  .newsletter__form input:focus-visible { outline: 2px solid var(--sage); outline-offset: 2px; }
+  .newsletter__note { flex-basis: 100%; color: var(--sage); font-size: 0.9rem; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-newsletter]");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const note = form.querySelector<HTMLElement>("[data-nl-note]");
+    if (note) note.hidden = false;
+    form.querySelector("input")?.setAttribute("value", "");
+    (form.querySelector("input") as HTMLInputElement).value = "";
+  });
+</script>

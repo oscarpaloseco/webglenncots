@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <rect width="1200" height="630" fill="#2E482C"/>
+  <circle cx="1000" cy="120" r="240" fill="#3A5A37" opacity="0.6"/>
+  <circle cx="180" cy="560" r="180" fill="#A9BBB1" opacity="0.18"/>
+  <text x="90" y="250" font-family="Georgia, serif" font-size="30" fill="#A9BBB1" letter-spacing="2">DIETISTA-NUTRICIONISTA</text>
+  <text x="86" y="345" font-family="Georgia, serif" font-size="92" fill="#F4F1E6">Glenn Cots</text>
+  <text x="90" y="430" font-family="Georgia, serif" font-size="40" fill="#E7EEE4" font-style="italic">Tu salud, entendida desde dentro</text>
+  <text x="90" y="520" font-family="Helvetica, Arial, sans-serif" font-size="26" fill="#C6D2BE">Tiroides · Autoinmunidad · Salud digestiva · PNI</text>
+</svg>

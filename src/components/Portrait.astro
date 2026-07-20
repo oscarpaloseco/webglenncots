@@ -1,0 +1,50 @@
+---
+// Placeholder elegante para las fotos personales de Glenn (pendientes de sesión).
+// No es un bloque de color vacío: marca claramente el hueco y mantiene la composición.
+interface Props {
+  label?: string;
+  ratio?: string;   // p.ej. "4 / 5"
+  class?: string;
+  rounded?: boolean;
+}
+const { label = "Foto de Glenn", ratio = "4 / 5", class: cls = "", rounded = true } = Astro.props;
+---
+<figure class={`portrait ${cls}`} style={`--ratio:${ratio}`} data-rounded={rounded}>
+  <div class="portrait__inner">
+    <svg class="portrait__silhouette" viewBox="0 0 200 250" aria-hidden="true" preserveAspectRatio="xMidYMax meet">
+      <circle cx="100" cy="86" r="42" />
+      <path d="M28 250c0-46 32-74 72-74s72 28 72 74Z" />
+    </svg>
+    <span class="portrait__tag">
+      <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M4 7h3l2-2h6l2 2h3v12H4z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><circle cx="12" cy="13" r="3.4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      {label}
+    </span>
+  </div>
+</figure>
+
+<style>
+  .portrait {
+    position: relative;
+    aspect-ratio: var(--ratio);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 20% 10%, color-mix(in srgb, var(--blush) 55%, var(--bg)) 0%, transparent 55%),
+      linear-gradient(155deg, var(--sage-pale), color-mix(in srgb, var(--sage) 45%, var(--bg)));
+    border: 1px solid var(--line);
+  }
+  .portrait[data-rounded="false"] { border-radius: var(--r); }
+  .portrait__inner { position: absolute; inset: 0; display: grid; place-items: center; }
+  .portrait__silhouette { width: 62%; color: color-mix(in srgb, var(--forest) 26%, transparent); }
+  .portrait__silhouette circle, .portrait__silhouette path { fill: currentColor; }
+  .portrait__tag {
+    position: absolute; bottom: 0.9rem; left: 50%; transform: translateX(-50%);
+    display: inline-flex; align-items: center; gap: 0.45rem; white-space: nowrap;
+    font-family: var(--sans); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em;
+    color: var(--forest);
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(4px);
+    padding: 0.4em 0.85em; border-radius: var(--r-pill);
+    border: 1px solid var(--line);
+  }
+</style>

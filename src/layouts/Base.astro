@@ -1,0 +1,116 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import StickyCta from "../components/StickyCta.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = "Glenn Cots · Dietista-Nutricionista especializada en tiroides y autoinmunidad",
+  description = "Nutrición clínica y PNI para patología tiroidea, enfermedades autoinmunes y salud digestiva. Trabajamos la causa raíz con cambios de hábitos sostenibles.",
+  image = "/og-default.svg",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site ?? "https://glenncots.com");
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hanken+Grotesque:wght@400;500;600;700&family=Spectral:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <script is:inline>
+      document.documentElement.classList.add("js");
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Saltar al contenido</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+    <StickyCta />
+
+    <style>
+      .skip-link {
+        position: fixed;
+        top: -100px;
+        left: 1rem;
+        z-index: 999;
+        background: var(--forest);
+        color: var(--on-forest);
+        padding: 0.7em 1.1em;
+        border-radius: var(--r-sm);
+        transition: top 0.25s;
+      }
+      .skip-link:focus { top: 1rem; }
+    </style>
+
+    <script>
+      // Reveal on scroll — mejora progresiva y a prueba de fallos.
+      // El contenido NUNCA queda oculto de forma permanente: si el observer no
+      // llega a disparar (scroll programático, pestaña en segundo plano, render
+      // headless), un failsafe lo revela igualmente.
+      const els = Array.from(document.querySelectorAll<HTMLElement>("[data-reveal]"));
+      const reveal = (el: Element) => el.classList.add("is-in");
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const vh = window.innerHeight || 0;
+      const canAnimate =
+        !prefersReduced &&
+        "IntersectionObserver" in window &&
+        vh > 0 &&
+        document.visibilityState === "visible";
+
+      // Solo si podemos animar de forma fiable "armamos" el estado oculto inicial.
+      // En cualquier otro caso el contenido permanece visible por defecto (el CSS
+      // no lo oculta salvo con html.reveal-on).
+      if (!canAnimate) {
+        els.forEach(reveal);
+      } else {
+        document.documentElement.classList.add("reveal-on");
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                reveal(entry.target);
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: "0px 0px -10% 0px", threshold: 0.1 }
+        );
+        els.forEach((el) => {
+          const rect = el.getBoundingClientRect();
+          if (rect.top < vh * 0.92 && rect.bottom > 0) reveal(el);
+          else io.observe(el);
+        });
+        // Failsafe: si la pestaña pasa a segundo plano, revela lo que quede.
+        document.addEventListener("visibilitychange", () => {
+          if (document.visibilityState !== "visible") els.forEach(reveal);
+        });
+      }
+    </script>
+  </body>
+</html>

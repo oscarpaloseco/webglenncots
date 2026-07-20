@@ -1,0 +1,118 @@
+---
+import Base from "../layouts/Base.astro";
+import Figure from "../components/Figure.astro";
+import { site } from "../data/site";
+
+const pilares = [
+  { t: "Energía", d: "Recuperar la vitalidad que la fatiga tiroidea y autoinmune te ha ido robando." },
+  { t: "Hábitos", d: "Construir rutinas de alimentación, descanso y movimiento que se sostienen." },
+  { t: "Comunidad", d: "Compartir el proceso con otras personas que viven lo mismo que tú." },
+  { t: "Acompañamiento", d: "Seguimiento cercano durante todo el programa, no estás sola." },
+];
+
+const incluye = [
+  "Sesiones grupales guiadas paso a paso",
+  "Material y recursos descargables",
+  "Pautas de alimentación antiinflamatoria",
+  "Espacio de dudas y seguimiento",
+  "Herramientas de cronobiología y estilo de vida",
+  "Comunidad privada de apoyo",
+];
+---
+
+<Base
+  title="Programa FUEGAS · Glenn Cots"
+  description="FUEGAS: un programa de acompañamiento en grupo para reconectar con tu energía, tus hábitos y tu salud, con seguimiento cercano."
+>
+  <section class="fuegas-hero surface-forest">
+    <div class="container fuegas-hero__grid">
+      <div class="fuegas-hero__copy" data-reveal>
+        <span class="badge" style="background:rgba(244,241,230,.12);color:var(--on-forest);border-color:rgba(244,241,230,.25)">Acompañamiento en grupo</span>
+        <h1>Programa <span class="fuegas-word">FUEGAS</span></h1>
+        <p class="lead">
+          Un programa para reavivar tu energía y reconstruir tus hábitos desde la raíz,
+          en comunidad y con acompañamiento cercano durante todo el proceso.
+        </p>
+        <div class="fuegas-hero__actions">
+          <a href={site.bookingUrl} class="btn btn--on-dark">Quiero información</a>
+          <a href="#incluye" class="btn btn--on-dark btn--ghost">Qué incluye</a>
+        </div>
+      </div>
+      <div class="fuegas-hero__media" data-reveal style="--reveal-delay:100ms">
+        <Figure id="photo-1466637574441-749b8f19452f" alt="Verduras frescas de temporada en un mercado" ratio="4 / 5" sizes="(min-width:900px) 40vw, 100vw" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <header class="fuegas-head" data-reveal>
+        <p class="kicker">Por qué FUEGAS</p>
+        <h2>Cuatro pilares para reconectar contigo</h2>
+      </header>
+      <div class="pilares">
+        {pilares.map((p, i) => (
+          <div class="pilar" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <span class="pilar__num eyebrow-num">0{i + 1}</span>
+            <h3>{p.t}</h3>
+            <p>{p.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section surface-sage" id="incluye">
+    <div class="container incluye__grid">
+      <div class="incluye__copy" data-reveal>
+        <p class="kicker">Qué incluye</p>
+        <h2>Todo lo que necesitas para avanzar</h2>
+        <p class="lead">Un acompañamiento completo, pensado para que no te falte ninguna pieza del proceso.</p>
+        <a href={site.bookingUrl} class="btn" style="margin-top:var(--space-m)">Pide información</a>
+      </div>
+      <ul class="incluye__list" role="list" data-reveal style="--reveal-delay:100ms">
+        {incluye.map((item) => (
+          <li>
+            <span class="incluye__check" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="13" height="13"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            {item}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="cta-final__panel surface-forest" data-reveal style="text-align:center;display:grid;gap:var(--space-s);justify-items:center;border-radius:var(--r-lg);padding:clamp(2.2rem,1.4rem + 4vw,4.5rem)">
+        <h2>¿Te unes a la próxima edición?</h2>
+        <p class="lead" style="max-width:46ch">Escríbeme y te cuento las fechas, el formato y cómo reservar tu plaza.</p>
+        <a href={site.bookingUrl} class="btn btn--on-dark">Quiero mi plaza</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .fuegas-hero { padding-block: clamp(2.5rem, 1.8rem + 4vw, 5rem); }
+  .fuegas-hero__grid { display: grid; gap: var(--space-l); align-items: center; }
+  @media (min-width: 880px) { .fuegas-hero__grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-xl); } }
+  .fuegas-hero .lead { margin-top: var(--space-s); }
+  .fuegas-word { font-style: italic; color: var(--sage); }
+  .fuegas-hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-m); }
+
+  .fuegas-head { margin-bottom: var(--space-l); text-align: center; display: grid; justify-items: center; gap: 0.5rem; }
+  .pilares { display: grid; gap: var(--space-s); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .pilar { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--space-m); }
+  .pilar__num { font-size: 1.4rem; }
+  .pilar h3 { font-size: var(--step-1); margin-top: 0.3rem; }
+  .pilar p { color: var(--muted); font-size: 0.96rem; margin-top: 0.4rem; }
+
+  .incluye__grid { display: grid; gap: var(--space-l); align-items: center; }
+  @media (min-width: 820px) { .incluye__grid { grid-template-columns: 1fr 1fr; gap: var(--space-xl); } }
+  .incluye__copy .lead { margin-top: var(--space-s); }
+  .incluye__list { display: grid; gap: var(--space-s); }
+  .incluye__list li { display: flex; align-items: center; gap: 0.8rem; font-weight: 500; background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); padding: var(--space-s) var(--space-m); }
+  .incluye__check { flex: none; display: grid; place-items: center; width: 26px; height: 26px; border-radius: 8px; background: var(--forest); color: var(--on-forest); }
+</style>

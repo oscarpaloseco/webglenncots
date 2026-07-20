@@ -1,0 +1,97 @@
+---
+import Base from "../../layouts/Base.astro";
+import Figure from "../../components/Figure.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const [featured, ...rest] = posts;
+const fmt = (d: Date) => d.toLocaleDateString("es-ES", { day: "numeric", month: "long", year: "numeric" });
+---
+
+<Base
+  title="Blog · Glenn Cots"
+  description="Divulgación sobre tiroides, autoinmunidad, salud digestiva y metabólica. Recursos y recetas para entender tu cuerpo y cuidarte mejor."
+>
+  <section class="page-hero">
+    <div class="container">
+      <p class="kicker" data-reveal>Blog</p>
+      <h1 data-reveal style="--reveal-delay:60ms">Divulgación y recursos</h1>
+      <p class="lead measure" data-reveal style="--reveal-delay:120ms">
+        Escribo sobre lo que veo en consulta: tiroides, autoinmunidad, salud digestiva y
+        metabólica. Sin tecnicismos innecesarios y con base científica.
+      </p>
+    </div>
+  </section>
+
+  {featured && (
+    <section class="section--tight">
+      <div class="container">
+        <a href={`/blog/${featured.id}`} class="featured" data-reveal>
+          <Figure id={featured.data.image} alt={featured.data.imageAlt} ratio="16 / 9" class="featured__img" eager sizes="(min-width:900px) 55vw, 100vw" />
+          <div class="featured__body">
+            <div class="featured__meta">
+              <span class="pill-cat">{featured.data.category}</span>
+              <span>{fmt(featured.data.date)} · {featured.data.readingTime}</span>
+            </div>
+            <h2 class="featured__title">{featured.data.title}</h2>
+            <p class="featured__excerpt">{featured.data.excerpt}</p>
+            <span class="link-underline">Leer artículo
+              <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </div>
+        </a>
+      </div>
+    </section>
+  )}
+
+  {rest.length > 0 && (
+    <section class="section--tight">
+      <div class="container">
+        <div class="posts__grid">
+          {rest.map((post, i) => (
+            <a href={`/blog/${post.id}`} class="post-card" data-reveal style={`--reveal-delay:${i * 80}ms`}>
+              <Figure id={post.data.image} alt={post.data.imageAlt} ratio="16 / 10" class="post-card__img" sizes="(min-width:900px) 30vw, 100vw" />
+              <div class="post-card__body">
+                <div class="post-card__meta">
+                  <span class="pill-cat pill-cat--sm">{post.data.category}</span>
+                  <span>{post.data.readingTime}</span>
+                </div>
+                <h3 class="post-card__title">{post.data.title}</h3>
+                <p class="post-card__excerpt">{post.data.excerpt}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+</Base>
+
+<style>
+  .page-hero { padding-block: clamp(2.5rem, 1.8rem + 3vw, 4.5rem) var(--space-m); display: grid; gap: var(--space-s); }
+  .page-hero .lead { margin-top: 0.4rem; }
+
+  .featured { display: grid; gap: var(--space-l); align-items: center; background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--r-lg); overflow: hidden; }
+  @media (min-width: 860px) { .featured { grid-template-columns: 1.2fr 1fr; } }
+  .featured :global(.featured__img) { border-radius: 0; height: 100%; }
+  .featured :global(.featured__img) img { transition: transform .6s cubic-bezier(.16,1,.3,1); }
+  .featured:hover :global(.featured__img) img { transform: scale(1.03); }
+  .featured__body { padding: clamp(1.4rem, 1rem + 2vw, 2.6rem); display: grid; gap: 0.7rem; }
+  .featured__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem; font-size: 0.85rem; color: var(--muted); }
+  .featured__title { font-size: var(--step-3); }
+  .featured__excerpt { color: var(--ink-soft); max-width: 52ch; }
+
+  .pill-cat { font-size: 0.76rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--forest); background: var(--sage-pale); padding: 0.35em 0.75em; border-radius: var(--r-pill); }
+  .pill-cat--sm { font-size: 0.72rem; }
+
+  .posts__grid { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+  .post-card { display: flex; flex-direction: column; gap: 0.85rem; }
+  .post-card :global(.post-card__img) { transition: transform .5s cubic-bezier(.16,1,.3,1); }
+  .post-card:hover :global(.post-card__img) img { transform: scale(1.04); }
+  .post-card__body { display: flex; flex-direction: column; gap: 0.4rem; }
+  .post-card__meta { display: flex; align-items: center; gap: 0.7rem; font-size: 0.8rem; color: var(--muted); }
+  .post-card__title { font-size: var(--step-1); }
+  .post-card__excerpt { color: var(--muted); font-size: 0.95rem; }
+</style>

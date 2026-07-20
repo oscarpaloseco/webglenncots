@@ -1,0 +1,228 @@
+/* =====================================================================
+   Glenn Cots · Sistema de diseño
+   Voz: arraigada · calma · precisa
+   Estrategia de color: Committed — verde bosque + papel crema + terracota
+   Paleta derivada de las referencias elegidas por la clienta (bewellbykelly,
+   jilliangreaves). Tipografía: Spectral (display serif) + Hanken Grotesque.
+   ===================================================================== */
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; }
+* { margin: 0; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body { line-height: 1.6; -webkit-font-smoothing: antialiased; }
+img, picture, svg, video { display: block; max-width: 100%; height: auto; }
+input, button, textarea, select { font: inherit; color: inherit; }
+button { background: none; border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
+:target { scroll-margin-top: 6rem; }
+
+/* ---- Tokens ---- */
+:root {
+  /* Superficie / papel (crema de bewellbykelly, elección de la clienta) */
+  --bg:            #FAF9F4;
+  --bg-2:          #F2F0E8;   /* alterno, un punto más profundo */
+  --sage-pale:     #E7EEE4;   /* superficie salvia clara (pale sage) */
+
+  /* Marca */
+  --forest:        #2E482C;   /* verde bosque — color de marca dominante */
+  --forest-deep:   #1E3319;   /* footer / drench */
+  --forest-700:    #3A5A37;
+  --sage:          #A9BBB1;   /* salvia */
+  --sage-500:      #8AA394;
+  --terracotta:    #A65A2A;   /* acento cálido */
+  --terracotta-soft:#C2703B;
+  --blush:         #D2B0A2;   /* piel / calidez en marcos e imágenes */
+
+  /* Tinta */
+  --ink:           #33322E;   /* texto principal — contraste ≥10:1 sobre crema */
+  --ink-soft:      #4C4A44;
+  --muted:         #5F5D56;   /* secundario — ≥5:1 sobre crema */
+  --line:          #E2DED2;   /* hairlines cálidas */
+  --on-forest:     #F4F1E6;   /* texto sobre verde */
+  --on-forest-mut: #C6D2BE;   /* secundario sobre verde */
+
+  /* Tipografía */
+  --serif: "Spectral", Georgia, "Times New Roman", serif;
+  --sans:  "Hanken Grotesque", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --step--1: clamp(0.82rem, 0.80rem + 0.10vw, 0.88rem);
+  --step-0:  clamp(1.02rem, 0.98rem + 0.20vw, 1.14rem);
+  --step-1:  clamp(1.22rem, 1.14rem + 0.40vw, 1.45rem);
+  --step-2:  clamp(1.55rem, 1.40rem + 0.75vw, 2.10rem);
+  --step-3:  clamp(2.00rem, 1.70rem + 1.50vw, 3.05rem);
+  --step-4:  clamp(2.55rem, 2.05rem + 2.50vw, 4.20rem);
+  --step-5:  clamp(3.05rem, 2.20rem + 4.20vw, 5.40rem);
+
+  /* Espacio (fluido) */
+  --space-3xs: 0.375rem;
+  --space-2xs: 0.625rem;
+  --space-xs:  0.875rem;
+  --space-s:   1.15rem;
+  --space-m:   1.8rem;
+  --space-l:   clamp(2.4rem, 1.8rem + 2vw, 3.6rem);
+  --space-xl:  clamp(3.5rem, 2.6rem + 3.5vw, 6rem);
+  --space-2xl: clamp(5rem, 3.6rem + 5vw, 9rem);
+
+  /* Radios — redondeados pero nunca círculos totales (salvo el badge CTA) */
+  --r-sm: 8px;
+  --r:    14px;
+  --r-lg: 22px;
+  --r-pill: 999px;
+
+  /* Sombras cálidas */
+  --shadow-s: 0 1px 2px rgba(46, 41, 30, 0.05), 0 2px 6px rgba(46, 41, 30, 0.05);
+  --shadow-m: 0 4px 12px rgba(46, 41, 30, 0.06), 0 14px 34px rgba(46, 41, 30, 0.08);
+  --shadow-l: 0 10px 30px rgba(30, 51, 25, 0.10), 0 30px 60px rgba(30, 51, 25, 0.12);
+
+  --content: 74rem;   /* ancho máx layout */
+  --measure: 62ch;    /* medida de lectura */
+
+  /* Z-scale semántica */
+  --z-header: 100;
+  --z-sticky-cta: 90;
+  --z-overlay: 200;
+  --z-drawer: 210;
+}
+
+/* ---- Base ---- */
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  font-family: var(--sans);
+  font-size: var(--step-0);
+  color: var(--ink);
+  background: var(--bg);
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--forest);
+  text-wrap: balance;
+}
+h1 { font-size: var(--step-5); }
+h2 { font-size: var(--step-4); }
+h3 { font-size: var(--step-2); }
+p  { text-wrap: pretty; }
+
+strong { font-weight: 600; color: var(--ink); }
+
+/* ---- Layout helpers ---- */
+.container {
+  width: 100%;
+  max-width: var(--content);
+  margin-inline: auto;
+  padding-inline: clamp(1.15rem, 0.6rem + 2.6vw, 2.5rem);
+}
+.section { padding-block: var(--space-2xl); }
+.section--tight { padding-block: var(--space-xl); }
+.measure { max-width: var(--measure); }
+.stack > * + * { margin-top: var(--space-s); }
+.center { text-align: center; }
+
+/* Kicker — sistema de marca deliberado (no eyebrow repetido en cada sección) */
+.kicker {
+  font-family: var(--sans);
+  font-size: var(--step--1);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--terracotta);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+.kicker::before {
+  content: "";
+  width: 1.6rem; height: 1px;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.lead {
+  font-size: var(--step-1);
+  color: var(--ink-soft);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+/* ---- Botones ---- */
+.btn {
+  --btn-bg: var(--forest);
+  --btn-fg: var(--on-forest);
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: var(--step-0);
+  line-height: 1;
+  padding: 0.95em 1.5em;
+  border-radius: var(--r-pill);
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  border: 1px solid transparent;
+  transition: transform .35s cubic-bezier(.16,1,.3,1), background-color .3s, box-shadow .35s, color .3s;
+  will-change: transform;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-m); }
+.btn:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; }
+.btn .btn__arrow { transition: transform .35s cubic-bezier(.16,1,.3,1); }
+.btn:hover .btn__arrow { transform: translateX(3px); }
+
+.btn--ghost {
+  --btn-bg: transparent;
+  --btn-fg: var(--forest);
+  border-color: var(--forest);
+}
+.btn--ghost:hover { background: var(--forest); color: var(--on-forest); }
+
+.btn--terra { --btn-bg: var(--terracotta); --btn-fg: #FBF6EF; }
+.btn--on-dark { --btn-bg: var(--on-forest); --btn-fg: var(--forest); }
+.btn--on-dark.btn--ghost { --btn-fg: var(--on-forest); border-color: rgba(244,241,230,.4); background: transparent; }
+.btn--on-dark.btn--ghost:hover { background: var(--on-forest); color: var(--forest); }
+
+.link-underline {
+  color: var(--forest); font-weight: 600;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding-bottom: 2px;
+  background-image: linear-gradient(var(--terracotta), var(--terracotta));
+  background-size: 0% 1.5px; background-repeat: no-repeat; background-position: left 100%;
+  transition: background-size .4s cubic-bezier(.16,1,.3,1);
+}
+.link-underline:hover { background-size: 100% 1.5px; }
+
+/* ---- Superficies ---- */
+.surface-sage { background: var(--sage-pale); }
+.surface-cream2 { background: var(--bg-2); }
+.surface-forest { background: var(--forest); color: var(--on-forest); }
+.surface-forest h1, .surface-forest h2, .surface-forest h3 { color: var(--on-forest); }
+.surface-forest .lead { color: var(--on-forest-mut); }
+
+/* ---- Motion: reveal on scroll ----
+   Contenido SIEMPRE visible por defecto. La animación solo se "arma" (html.reveal-on)
+   cuando JS confirma que la página está visible y el usuario acepta movimiento.
+   Así, en prerender, pestaña oculta o reduced-motion, nada queda invisible ni se
+   congela una transición a medias. */
+html.reveal-on [data-reveal] {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+html.reveal-on [data-reveal].is-in { opacity: 1; transform: none; }
+
+/* Utilidades */
+.eyebrow-num { font-family: var(--serif); font-style: italic; color: var(--terracotta); }
+.hairline { height: 1px; background: var(--line); border: 0; }
+.badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: var(--step--1); font-weight: 500;
+  padding: .4em .85em; border-radius: var(--r-pill);
+  background: var(--sage-pale); color: var(--forest);
+  border: 1px solid var(--line);
+}

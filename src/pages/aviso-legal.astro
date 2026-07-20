@@ -1,0 +1,37 @@
+---
+import Base from "../layouts/Base.astro";
+import { site } from "../data/site";
+---
+<Base title="Aviso legal · Glenn Cots" description="Aviso legal del sitio web de Glenn Cots, dietista-nutricionista.">
+  <section class="legal">
+    <div class="container legal__inner">
+      <a href="/" class="legal__back">← Inicio</a>
+      <h1>Aviso legal</h1>
+      <p class="legal__note">Plantilla de referencia. Pendiente de completar con los datos fiscales y de colegiación definitivos.</p>
+
+      <h2>Titular</h2>
+      <p>Glenn Cots — Dietista-Nutricionista. Nº de colegiada: por completar. Contacto: <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+      <h2>Objeto</h2>
+      <p>Este sitio web tiene carácter informativo y divulgativo sobre nutrición clínica. La información publicada no sustituye el consejo, diagnóstico o tratamiento de un profesional sanitario en consulta.</p>
+
+      <h2>Propiedad intelectual</h2>
+      <p>Los contenidos, textos e imágenes de este sitio pertenecen a su titular o se usan con licencia, y no pueden reproducirse sin autorización.</p>
+
+      <h2>Responsabilidad</h2>
+      <p>El titular no se responsabiliza del uso que se haga de la información publicada. Ante cualquier síntoma o patología, consulta siempre con un profesional.</p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .legal { padding-block: clamp(2.5rem, 1.8rem + 3vw, 4.5rem) var(--space-2xl); }
+  .legal__inner { max-width: 44rem; display: grid; gap: var(--space-s); }
+  .legal__back { color: var(--muted); font-weight: 500; width: max-content; }
+  .legal__back:hover { color: var(--forest); }
+  .legal h1 { font-size: var(--step-4); margin-top: var(--space-s); }
+  .legal h2 { font-size: var(--step-1); margin-top: var(--space-m); }
+  .legal p { color: var(--ink-soft); }
+  .legal a { color: var(--forest); text-decoration: underline; }
+  .legal__note { font-size: 0.9rem; color: var(--muted); background: var(--sage-pale); padding: 0.8em 1em; border-radius: var(--r); }
+</style>

@@ -1,0 +1,170 @@
+---
+import Base from "../layouts/Base.astro";
+import Portrait from "../components/Portrait.astro";
+import Figure from "../components/Figure.astro";
+import { site } from "../data/site";
+
+const formacion = [
+  { year: "Grado Superior", title: "Dietética y Nutrición", place: "Instituto Roger de Llúria" },
+  { year: "Grado universitario", title: "Nutrición Humana y Dietética", place: "Universidad de Vic · UVIC" },
+  { year: "En curso", title: "Psiconeuroinmunología (PNI)", place: "Academia SoyPro" },
+  { year: "Especialización", title: "Tiroides, patología autoinmune y digestiva", place: "Formación continua" },
+];
+
+const valores = [
+  { t: "Causa raíz", d: "Busco el origen de cada síntoma, no solo silenciarlo." },
+  { t: "Sin dietas milagro", d: "Nada de etiquetas rígidas ni soluciones exprés." },
+  { t: "Desde la experiencia", d: "Soy paciente autoinmune: sé lo que se siente." },
+  { t: "Hábitos que duran", d: "Cambios sostenibles, no restricciones imposibles." },
+];
+---
+
+<Base
+  title="Sobre mí · Glenn Cots"
+  description="Soy Glenn Cots, dietista-nutricionista especializada en enfermedades autoinmunes y patologías tiroideas. De paciente de Hashimoto a acompañar a otras personas."
+>
+  <section class="page-hero">
+    <div class="container about-hero">
+      <div class="about-hero__copy" data-reveal>
+        <p class="kicker">Quién soy</p>
+        <h1>Soy Glenn Cots, y entiendo por lo que estás pasando</h1>
+        <p class="lead">
+          Dietista-nutricionista especializada en enfermedades autoinmunes y
+          patologías tiroideas. Mi interés por la alimentación viene de lejos, pero se
+          convirtió en vocación cuando me diagnosticaron hipotiroidismo de Hashimoto.
+        </p>
+        <div class="about-hero__actions">
+          <a href={site.bookingUrl} class="btn">Pide cita</a>
+          <a href="/consulta" class="btn btn--ghost">Áreas de consulta</a>
+        </div>
+      </div>
+      <div class="about-hero__media" data-reveal style="--reveal-delay:100ms">
+        <Portrait label="Retrato de Glenn" ratio="3 / 4" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Historia -->
+  <section class="section story surface-cream2">
+    <div class="container story__grid">
+      <div class="story__media" data-reveal>
+        <Figure id="photo-1519996529931-28324d5a630e" alt="Hierbas y especias frescas dispuestas sobre una superficie clara" ratio="1 / 1" sizes="(min-width:900px) 40vw, 100vw" />
+      </div>
+      <div class="story__copy stack" data-reveal style="--reveal-delay:100ms">
+        <h2>Mi historia</h2>
+        <p>
+          Ese diagnóstico, en pleno primer año de carrera, me empujó a querer entender a
+          fondo cómo funciona el cuerpo y cómo la alimentación puede influir en él. Dejé
+          de ver la nutrición como una lista de prohibiciones y empecé a verla como una
+          herramienta para regular procesos que parecían fuera de control.
+        </p>
+        <p>
+          Cursé el Grado Superior en Dietética y Nutrición y, más adelante, la carrera de
+          Nutrición Humana y Dietética en la UVIC. Actualmente me formo en
+          Psiconeuroinmunología en la academia SoyPro, y he completado diversos cursos
+          especializados en tiroides, patología autoinmune y patologías digestivas.
+        </p>
+        <p>
+          Hoy combino toda esta formación con mi propia vivencia como paciente autoinmune
+          para acompañar a otras personas en su proceso. Comparto también contenido,
+          recetas y recursos sobre salud, tiroides y enfermedades autoinmunes en mi web y
+          redes.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section class="section">
+    <div class="container">
+      <header class="values__head" data-reveal>
+        <p class="kicker">En qué creo</p>
+        <h2>La forma en la que acompaño</h2>
+      </header>
+      <div class="values__grid">
+        {valores.map((v, i) => (
+          <div class="value" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <h3>{v.t}</h3>
+            <p>{v.d}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Formación -->
+  <section class="section surface-sage">
+    <div class="container formacion__grid">
+      <div class="formacion__intro" data-reveal>
+        <p class="kicker">Formación</p>
+        <h2>Rigor detrás de cada plan</h2>
+        <p class="lead">La especialización es lo que permite un abordaje completo, y no dejar nada al azar.</p>
+      </div>
+      <ol class="timeline" role="list">
+        {formacion.map((f, i) => (
+          <li class="timeline__item" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <span class="timeline__year">{f.year}</span>
+            <h3 class="timeline__title">{f.title}</h3>
+            <p class="timeline__place">{f.place}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Medios -->
+  <section class="section media-mentions">
+    <div class="container">
+      <header class="media-mentions__head" data-reveal>
+        <p class="kicker">Charlas y medios</p>
+        <h2>Divulgación y apariciones</h2>
+        <p class="lead measure">
+          Colaboro en charlas, pódcast y medios divulgando sobre tiroides, autoinmunidad
+          y salud digestiva. Un espacio en construcción que iré ampliando.
+        </p>
+      </header>
+      <div class="media-mentions__grid" data-reveal>
+        {["Charla", "Pódcast", "Entrevista", "Taller"].map((m) => (
+          <div class="media-slot">
+            <span class="media-slot__type">{m}</span>
+            <span class="media-slot__soon">Próximamente</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .page-hero { padding-block: clamp(2.5rem, 1.8rem + 3vw, 4.5rem) var(--space-l); }
+  .about-hero { display: grid; gap: var(--space-l); align-items: center; }
+  @media (min-width: 880px) { .about-hero { grid-template-columns: 1.15fr 0.85fr; gap: var(--space-xl); } }
+  .about-hero .lead { margin-top: var(--space-s); }
+  .about-hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-m); }
+  .about-hero__media { max-width: 24rem; margin-inline: auto; width: 100%; }
+
+  .story__grid { display: grid; gap: var(--space-l); align-items: center; }
+  @media (min-width: 880px) { .story__grid { grid-template-columns: 0.9fr 1.1fr; gap: var(--space-xl); } }
+
+  .values__head { margin-bottom: var(--space-l); }
+  .values__grid { display: grid; gap: var(--space-s); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .value { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-lg); padding: var(--space-m); }
+  .value h3 { font-size: var(--step-1); }
+  .value p { color: var(--muted); margin-top: 0.4rem; font-size: 0.96rem; }
+
+  .formacion__grid { display: grid; gap: var(--space-l); }
+  @media (min-width: 880px) { .formacion__grid { grid-template-columns: 0.9fr 1.1fr; gap: var(--space-xl); align-items: start; } }
+  .formacion__intro .lead { margin-top: var(--space-s); }
+  .timeline { display: grid; gap: 0; }
+  .timeline__item { position: relative; padding: var(--space-m) 0 var(--space-m) var(--space-m); border-left: 2px solid var(--forest); }
+  .timeline__item::before { content: ""; position: absolute; left: -7px; top: calc(var(--space-m) + 0.4rem); width: 12px; height: 12px; border-radius: 50%; background: var(--terracotta); border: 2px solid var(--bg); }
+  .timeline__year { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--terracotta); }
+  .timeline__title { font-size: var(--step-1); margin-top: 0.2rem; }
+  .timeline__place { color: var(--muted); font-size: 0.95rem; margin-top: 0.2rem; }
+
+  .media-mentions__head { margin-bottom: var(--space-l); }
+  .media-mentions__grid { display: grid; gap: var(--space-s); grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .media-slot { aspect-ratio: 16 / 10; border: 1px dashed var(--sage-500); border-radius: var(--r); display: grid; place-content: center; text-align: center; gap: 0.3rem; background: var(--sage-pale); }
+  .media-slot__type { font-family: var(--serif); font-size: 1.3rem; color: var(--forest); }
+  .media-slot__soon { font-size: 0.8rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+</style>
