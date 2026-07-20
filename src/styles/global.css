@@ -46,6 +46,8 @@ ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
   /* Tipografía */
   --serif: "Spectral", Georgia, "Times New Roman", serif;
   --sans:  "Hanken Grotesque", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --display-italic: "Instrument Serif", "Spectral", Georgia, serif; /* hero: serif italic */
+  --sans-alt: "Switzer", "Helvetica Neue", Helvetica, Arial, sans-serif; /* hero: sans */
 
   --step--1: clamp(0.82rem, 0.80rem + 0.10vw, 0.88rem);
   --step-0:  clamp(1.02rem, 0.98rem + 0.20vw, 1.14rem);
@@ -78,6 +80,7 @@ ul[role="list"], ol[role="list"] { list-style: none; padding: 0; }
 
   --content: 74rem;   /* ancho máx layout */
   --measure: 62ch;    /* medida de lectura */
+  --header-h: 4.6rem; /* altura del header sticky */
 
   /* Z-scale semántica */
   --z-header: 100;
