@@ -18,10 +18,10 @@ export const nav: NavItem[] = [
     label: "Consulta",
     href: "/consulta",
     children: [
-      { label: "Salud tiroidea y endocrina", href: "/consulta#tiroides", desc: "Hipotiroidismo, Hashimoto, nódulos" },
-      { label: "Salud digestiva avanzada", href: "/consulta#digestiva", desc: "SIBO, IMO, SII, permeabilidad" },
-      { label: "Enfermedades autoinmunes", href: "/consulta#autoinmunes", desc: "Enfoque PNI inmunomodulador" },
-      { label: "Salud metabólica y peso", href: "/consulta#metabolica", desc: "Resistencia a la insulina, EHGNA" },
+      { label: "Salud tiroidea", href: "/consulta/salud-tiroidea", desc: "Hipotiroidismo, Hashimoto, nódulos" },
+      { label: "Salud digestiva", href: "/consulta/salud-digestiva", desc: "SIBO, IMO, SII, permeabilidad" },
+      { label: "Enfermedades autoinmunes", href: "/consulta/enfermedades-autoinmunes", desc: "Enfoque PNI inmunomodulador" },
+      { label: "Salud metabólica y peso", href: "/consulta/salud-metabolica", desc: "Resistencia a la insulina, EHGNA" },
     ],
   },
   {

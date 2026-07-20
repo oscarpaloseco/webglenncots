@@ -1,0 +1,312 @@
+---
+import Base from "../../layouts/Base.astro";
+import Figure from "../../components/Figure.astro";
+import AreaIcon from "../../components/AreaIcon.astro";
+import { servicios } from "../../data/servicios";
+import { site } from "../../data/site";
+
+export async function getStaticPaths() {
+  return servicios.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+
+const { s } = Astro.props;
+const others = servicios.filter((x) => x.slug !== s.slug);
+const url = new URL(`/consulta/${s.slug}`, Astro.site ?? "https://glenncots.com").href;
+const base = (Astro.site ?? new URL("https://glenncots.com")).origin;
+
+// Datos estructurados para SEO
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Inicio", item: base + "/" },
+        { "@type": "ListItem", position: 2, name: "Consulta", item: base + "/consulta" },
+        { "@type": "ListItem", position: 3, name: s.short, item: url },
+      ],
+    },
+    {
+      "@type": "MedicalWebPage",
+      name: s.h1,
+      description: s.seoDescription,
+      url,
+      about: { "@type": "MedicalCondition", name: s.short },
+    },
+    {
+      "@type": "Service",
+      serviceType: s.h1,
+      name: s.seoTitle,
+      description: s.seoDescription,
+      url,
+      areaServed: "ES",
+      provider: {
+        "@type": "Person",
+        name: site.name,
+        jobTitle: site.role,
+        url: base + "/sobre-mi",
+      },
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: s.faqs.map((f) => ({
+        "@type": "Question",
+        name: f.q,
+        acceptedAnswer: { "@type": "Answer", text: f.a },
+      })),
+    },
+  ],
+};
+---
+
+<Base title={`${s.seoTitle} · Glenn Cots`} description={s.seoDescription}>
+  <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
+
+  <!-- Hero -->
+  <section class="svc-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Migas de pan">
+        <a href="/">Inicio</a><span aria-hidden="true">/</span>
+        <a href="/consulta">Consulta</a><span aria-hidden="true">/</span>
+        <span aria-current="page">{s.short}</span>
+      </nav>
+      <div class="svc-hero__grid">
+        <div class="svc-hero__copy" data-reveal>
+          <p class="kicker"><span class="svc-num">{s.number}</span> {s.tagline}</p>
+          <h1>{s.h1}</h1>
+          <p class="lead">{s.intro}</p>
+          <div class="svc-hero__actions">
+            <a href={site.bookingUrl} class="btn">
+              Pide cita
+              <svg class="btn__arrow" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a href="/consulta" class="btn btn--ghost">Todas las áreas</a>
+          </div>
+        </div>
+        <div class="svc-hero__media" data-reveal style="--reveal-delay:100ms">
+          <Figure id={s.image.id} alt={s.image.alt} ratio="4 / 5" eager sizes="(min-width:900px) 40vw, 100vw" />
+          <span class="svc-hero__badge"><AreaIcon name={s.icon} size={26} /></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Qué es / enfoque -->
+  <section class="section--tight">
+    <div class="container svc-prose" data-reveal>
+      <h2>{s.whatIs.heading}</h2>
+      {s.whatIs.paragraphs.map((p) => <p>{p}</p>)}
+    </div>
+  </section>
+
+  <!-- Síntomas -->
+  <section class="section surface-sage">
+    <div class="container">
+      <header class="svc-head" data-reveal>
+        <h2>{s.symptoms.heading}</h2>
+        <p class="lead">{s.symptoms.intro}</p>
+      </header>
+      <ul class="svc-symptoms" role="list" data-reveal>
+        {s.symptoms.items.map((it) => (
+          <li>
+            <span class="svc-symptoms__dot" aria-hidden="true"></span>
+            {it}
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Condiciones -->
+  <section class="section">
+    <div class="container">
+      <header class="svc-head" data-reveal>
+        <h2>{s.conditions.heading}</h2>
+        <p class="lead measure">{s.conditions.intro}</p>
+      </header>
+      <ul class="svc-conditions" role="list">
+        {s.conditions.items.map((item, i) => (
+          <li data-reveal style={`--reveal-delay:${i * 60}ms`}>
+            <span class="svc-conditions__check" aria-hidden="true">
+              <svg viewBox="0 0 16 16" width="13" height="13"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <div>
+              <p class="svc-conditions__name">{item.name}</p>
+              <p class="svc-conditions__desc">{item.desc}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Cómo trabajo -->
+  <section class="section surface-cream2">
+    <div class="container">
+      <header class="svc-head" data-reveal>
+        <h2>{s.approach.heading}</h2>
+        <p class="lead measure">{s.approach.intro}</p>
+      </header>
+      <ol class="svc-steps" role="list">
+        {s.approach.steps.map((st, i) => (
+          <li class="svc-step" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <span class="svc-step__num">0{i + 1}</span>
+            <h3 class="svc-step__title">{st.t}</h3>
+            <p class="svc-step__desc">{st.d}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Incluye + para quién -->
+  <section class="section">
+    <div class="container svc-two">
+      <div class="svc-panel" data-reveal>
+        <h2>{s.includes.heading}</h2>
+        <ul class="svc-list" role="list">
+          {s.includes.items.map((it) => (
+            <li>
+              <span class="svc-list__check" aria-hidden="true">
+                <svg viewBox="0 0 16 16" width="12" height="12"><path d="M3 8.5 6.5 12 13 4.5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              {it}
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="svc-panel" data-reveal style="--reveal-delay:100ms">
+        <h2>{s.forWhom.heading}</h2>
+        <ul class="svc-list svc-list--arrow" role="list">
+          {s.forWhom.items.map((it) => (
+            <li>
+              <span class="svc-list__check" aria-hidden="true">
+                <svg viewBox="0 0 16 16" width="12" height="12"><path d="M3 8h9M8 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+              {it}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section surface-sage">
+    <div class="container">
+      <header class="svc-head" data-reveal>
+        <p class="kicker">Preguntas frecuentes</p>
+        <h2>Lo que más me preguntáis</h2>
+      </header>
+      <div class="svc-faq" data-reveal>
+        {s.faqs.map((f) => (
+          <details class="faq">
+            <summary>{f.q}<span class="faq__icon" aria-hidden="true"></span></summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Otras áreas -->
+  <section class="section--tight">
+    <div class="container">
+      <header class="svc-head" data-reveal><h2>Otras áreas de consulta</h2></header>
+      <div class="svc-related">
+        {others.map((o) => (
+          <a href={`/consulta/${o.slug}`} class="svc-related__tile" data-reveal>
+            <div class="svc-related__media">
+              <Figure id={o.image.id} alt={o.image.alt} ratio="16 / 10" class="svc-related__img" sizes="(min-width:900px) 30vw, 100vw" />
+            </div>
+            <div class="svc-related__foot">
+              <h3>{o.short}</h3>
+              <svg class="area-tile__arrow" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section--tight">
+    <div class="container">
+      <div class="svc-cta" data-reveal>
+        <h2>Empecemos a trabajar en tu caso</h2>
+        <p class="lead">Reserva tu primera visita y valoramos juntas tu situación. Consulta online y presencial.</p>
+        <a href={site.bookingUrl} class="btn">Pide cita</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .svc-hero { padding-block: clamp(1.4rem, 1rem + 2vw, 2.6rem) var(--space-l); }
+  .crumbs { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--muted); margin-bottom: var(--space-m); }
+  .crumbs a:hover { color: var(--forest); }
+  .crumbs [aria-current] { color: var(--ink); }
+  .svc-hero__grid { display: grid; gap: var(--space-l); align-items: center; }
+  @media (min-width: 880px) { .svc-hero__grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-xl); } }
+  .svc-num { font-family: var(--display-italic); font-style: italic; color: var(--terracotta); margin-right: 0.2rem; }
+  .svc-hero__copy h1 { margin-block: var(--space-2xs) var(--space-s); }
+  .svc-hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-xs); margin-top: var(--space-m); }
+  .svc-hero__media { position: relative; }
+  .svc-hero__badge { position: absolute; top: -1rem; left: -1rem; display: grid; place-items: center; width: 58px; height: 58px; background: var(--bg); border: 1px solid var(--line); border-radius: 16px; box-shadow: var(--shadow-m); color: var(--forest); }
+
+  .svc-prose { max-width: 44rem; }
+  .svc-prose h2 { margin-bottom: var(--space-s); }
+  .svc-prose p { color: var(--ink-soft); margin-top: var(--space-s); line-height: 1.75; }
+
+  .svc-head { margin-bottom: var(--space-l); display: grid; gap: 0.6rem; }
+  .svc-head .lead { margin-top: 0; }
+
+  .svc-symptoms { display: grid; gap: 0.7rem 1.6rem; grid-template-columns: 1fr; }
+  @media (min-width: 680px) { .svc-symptoms { grid-template-columns: 1fr 1fr; } }
+  .svc-symptoms li { display: flex; align-items: center; gap: 0.75rem; font-size: 1.02rem; color: var(--ink); }
+  .svc-symptoms__dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--terracotta); }
+
+  .svc-conditions { display: grid; gap: var(--space-s); grid-template-columns: 1fr; max-width: 60rem; }
+  @media (min-width: 760px) { .svc-conditions { grid-template-columns: 1fr 1fr; gap: var(--space-m); } }
+  .svc-conditions li { display: flex; gap: 0.85rem; align-items: flex-start; }
+  .svc-conditions__check { flex: none; display: grid; place-items: center; width: 26px; height: 26px; margin-top: 2px; border-radius: 8px; background: var(--forest); color: var(--on-forest); }
+  .svc-conditions__name { font-weight: 600; color: var(--ink); }
+  .svc-conditions__desc { color: var(--muted); font-size: 0.95rem; margin-top: 2px; }
+
+  .svc-steps { display: grid; gap: var(--space-m); grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .svc-step { position: relative; padding-top: var(--space-m); border-top: 2px solid var(--forest); }
+  .svc-step__num { font-family: var(--display-italic); font-style: italic; font-size: 1.5rem; color: var(--terracotta); }
+  .svc-step__title { font-size: var(--step-1); margin-top: 0.25rem; }
+  .svc-step__desc { color: var(--muted); font-size: 0.96rem; margin-top: 0.4rem; }
+
+  .svc-two { display: grid; gap: var(--space-m); }
+  @media (min-width: 820px) { .svc-two { grid-template-columns: 1fr 1fr; gap: var(--space-l); } }
+  .svc-panel { background: var(--bg-2); border: 1px solid var(--line); border-radius: var(--r-lg); padding: clamp(1.5rem, 1rem + 2vw, 2.4rem); }
+  .svc-panel h2 { font-size: var(--step-2); margin-bottom: var(--space-s); }
+  .svc-list { display: grid; gap: 0.7rem; }
+  .svc-list li { display: flex; gap: 0.7rem; align-items: flex-start; color: var(--ink-soft); }
+  .svc-list__check { flex: none; display: grid; place-items: center; width: 22px; height: 22px; margin-top: 2px; border-radius: 6px; background: var(--forest); color: var(--on-forest); }
+
+  .svc-faq { display: grid; gap: 0.6rem; max-width: 52rem; }
+  .faq { background: var(--bg); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+  .faq summary { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: var(--space-s) var(--space-m); cursor: pointer; font-weight: 600; color: var(--forest); font-size: 1.05rem; list-style: none; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq__icon { position: relative; flex: none; width: 16px; height: 16px; }
+  .faq__icon::before, .faq__icon::after { content: ""; position: absolute; background: var(--terracotta); border-radius: 2px; transition: transform .3s; }
+  .faq__icon::before { top: 7px; left: 0; width: 16px; height: 2px; }
+  .faq__icon::after { top: 0; left: 7px; width: 2px; height: 16px; }
+  .faq[open] .faq__icon::after { transform: scaleY(0); }
+  .faq p { padding: 0 var(--space-m) var(--space-m); color: var(--ink-soft); max-width: 64ch; }
+
+  .svc-related { display: grid; gap: clamp(1rem, 2vw, 1.5rem); grid-template-columns: 1fr; }
+  @media (min-width: 700px) { .svc-related { grid-template-columns: repeat(3, 1fr); } }
+  .svc-related__media { overflow: hidden; border-radius: var(--r-lg); }
+  .svc-related :global(.svc-related__img) img { transition: transform .7s cubic-bezier(.16,1,.3,1); }
+  .svc-related__tile:hover :global(.svc-related__img) img { transform: scale(1.05); }
+  .svc-related__foot { display: flex; align-items: center; justify-content: space-between; gap: 0.6rem; margin-top: var(--space-s); }
+  .svc-related__foot h3 { font-size: var(--step-1); }
+  .svc-related__tile:hover .area-tile__arrow { transform: translateX(3px); color: var(--terracotta); }
+
+  .svc-cta { border-radius: var(--r-lg); background: var(--bg-2); border: 1px solid var(--line); padding: clamp(2.4rem, 1.6rem + 4vw, 4.8rem); text-align: center; display: grid; gap: var(--space-s); justify-items: center; }
+  .svc-cta .lead { max-width: 46ch; }
+</style>

@@ -2,7 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Figure from "../components/Figure.astro";
 import AreaIcon from "../components/AreaIcon.astro";
-import { areas } from "../data/areas";
+import { servicios } from "../data/servicios";
 import { site } from "../data/site";
 import { getCollection } from "astro:content";
 
@@ -124,14 +124,14 @@ const tickerImg = (id: string) =>
       </header>
 
       <div class="areas__grid">
-        {areas.map((area, i) => (
-          <a href={`/consulta#${area.id}`} class="area-tile" data-reveal style={`--reveal-delay:${i * 80}ms`}>
+        {servicios.map((s, i) => (
+          <a href={`/consulta/${s.slug}`} class="area-tile" data-reveal style={`--reveal-delay:${i * 80}ms`}>
             <div class="area-tile__media">
-              <Figure id={area.image.id} alt={area.image.alt} ratio="4 / 5" class="area-tile__img" sizes="(min-width:900px) 23vw, 45vw" />
-              <span class="area-tile__num">{area.number}</span>
+              <Figure id={s.image.id} alt={s.image.alt} ratio="4 / 5" class="area-tile__img" sizes="(min-width:900px) 23vw, 45vw" />
+              <span class="area-tile__num">{s.number}</span>
             </div>
             <div class="area-tile__foot">
-              <h3 class="area-tile__title">{area.title}</h3>
+              <h3 class="area-tile__title">{s.title}</h3>
               <svg class="area-tile__arrow" viewBox="0 0 16 16" width="15" height="15" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
           </a>
